@@ -1,0 +1,266 @@
+AI Programming 
+Referentievragen leerstof
+VIVES University of Applied Sciences
+Bachelor in electronics-ICT
+
+
+2
+Referentievragen AI Programming
+Chapter 1 – Intuition of artificial intelligence
+Referentievragen leerstof
+•
+Why is there no unanimous definition for artificial intelligence?
+•
+What is the difference between quantitative data and qualitative data? Give some concrete
+examples of both types of data.
+•
+What is the difference between data, information and knowledge?
+•
+What is an algorithm? What is an AI algorithm? What are the components of an algorithm?
+•
+Give a few categories of problems that people are trying to solve via (AI) algorithms.
+•
+What is the difference between a local best solution and a global best solution?
+•
+What is the difference between super intelligence, general intelligence and narrow
+intelligence?
+•
+What is the relationship between biology-inspired algorithms, machine learning, deep
+learning and search algorithms?
+•
+Which three types of 'learning' fall under machine learning and concisely explain each type
+of 'learning'?
+
+
+3
+Referentievragen AI Programming
+Chapter 2 – Search fundamentals
+Referentievragen leerstof
+•
+What is a data structure and give some concrete examples of data structures?
+•
+Explain the following terms: graph, vertex, node and edge.
+•
+Given: a graph
+o
+Assignment: determine the 'array of edges’, the ‘incidence matrix’ and the 'adjacency
+matrix’
+•
+Explain: a tree is a connected acyclic graph
+•
+Explain the following ‘tree’ terms: root node, parent node, sibling node, descendent,
+ancestor, leaf node, goal node, path, cost, degree and depth.
+•
+Explain the Breadth-First Search (BFS) algorithm and which data structure is used?
+•
+Given: a search tree
+o
+Assignment: apply the Breadth-First Search (BFS) algorithm to find any solution
+•
+Explain the Depth-First Search (DFS) algorithm and which data structure is used?
+•
+Given: a search tree
+o
+Assignment: apply the Depth-First Search (DFS) algorithm to find any solution
+
+
+4
+Referentievragen AI Programming
+Chapter 3 – Intelligent search
+Referentievragen leerstof
+•
+Heuristics
+o
+What is a heuristic?
+o
+Why can heuristics improve the efficiency of search problems?
+o
+Give a few concrete examples of heuristics.
+•
+A* Search
+o
+Explain how the A* search algorithm works.
+o
+How is the cost function determined?
+•
+A* Search
+o
+given: a search tree with the cost per node.
+o
+question: determine the sequence of searching the search tree, using the A* algorithm.
+
+
+5
+Referentievragen AI Programming
+Chapter 3 – Intelligent search
+Referentievragen leerstof
+•
+Min-Max Adversarial Search
+o
+Explain how the min-max adversarial search algorithm works.
+•
+Min-Max Adversarial Search
+o
+given: a search tree with the cost for each leaf node.
+o
+question: determine the value of each node in the min-max search tree.
+•
+Alpha-Beta Pruning
+o
+Explain how the alpha-beta pruning adversarial search algorithm works.
+o
+What is alpha? What is beta?
+o
+What makes alpha-beta pruning a much more efficient search algorithm?
+•
+Alpha-Beta Pruning
+o
+given: a search tree with the cost for each leaf node.
+o
+question: determine the value of each node in the search tree and explain why certain branches
+in the search tree may be pruned.
+
+
+6
+Referentievragen AI Programming
+Chapter 4 – Evolutionary algoritms
+Referentievragen leerstof
+•
+Genetic Algorithm: Life cycle
+o
+Briefly explain the life cycle of a genetic algorithm.
+•
+Enter diversity
+o
+Genetic algorithms use crossover and mutation as principles to ensure the diversity of the next
+generations.
+•
+Explain this principle.
+•
+Give some examples of crossover and mutation.
+•
+Genetic Algorithm parameters
+o
+Name 5 parameters to configure a genetic algorithm.
+o
+How does each parameter affect the generation of solutions?
+•
+Fitness function
+o
+What is a fitness function within genetic algorithms?
+o
+Why is the correct choice of the right fitness function crucial for the performance of the
+algorithm?
+
+
+7
+Referentievragen AI Programming
+Chapter 5 – Advanced evolutionary approaches
+Referentievragen leerstof
+•
+Selection mechanisms
+•
+Briefly discuss the principle of following selection mechanisms in the evolutionary algorithm and
+discuss the advantages and disadvantages of each selection mechanism:
+•
+roulette-wheel selection
+•
+rank selection
+•
+tournament selection
+•
+elitism selection
+•
+Mutation mechanisms
+•
+Briefly discuss the principle of following mutation mechanisms in the evolutionary algorithm:
+•
+boundary mutation
+•
+arithmetic mutation
+•
+Tree encoding and tree crossover
+•
+Briefly discuss the principle of:
+•
+tree encoding
+•
+tree crossover
+
+
+8
+Referentievragen AI Programming
+Chapter 6 – Swarm intelligence
+Referentievragen leerstof
+•
+Swarm intelligence
+•
+Explain what swarm intelligence is and on what principles is this form of intelligence based.
+•
+Why is the analogy to ants selected in the ant optimization algorithm?
+•
+Ant colony optimization algorithm
+•
+Discuss the different steps in the ant colony optimization algorithm
+•
+Discuss the mathematical formula for destination selection based on pheromones and distance
+heuristics.
+•
+How is the best solution ultimately determined?
+•
+What criteria can be used to stop the algorithm?
+•
+Ant colony optimization algorithm – selection of the destination
+•
+given: a figure showing the distances between different objects and the intensity of the
+pheromones on each of the paths.
+•
+question: discuss how the destination with the highest probability is determined. Use the
+mathematical formula for selecting the destination and choose your own value for alpha and
+beta.
+
+
+9
+Referentievragen AI Programming
+Chapter 7 – Swarm intelligence: Particles
+Referentievragen leerstof
+•
+Particle swarm intelligence: bird flocks
+o
+What do the following terms mean for simulating the movement of individual birds in relation to bird flocks?
+•
+Alignment
+•
+Cohesion
+•
+Separation
+•
+Particle swarm optimization algorithm
+•
+Discuss the different steps in the particle swarm optimization life cycle algorithm
+•
+Discuss how the position of the particles is updated
+•
+How is the best solution ultimately determined?
+•
+What criteria can be used to stop the algorithm?
+•
+Particle swarm optimization algorithm
+•
+Explain the following relation:
+o
+new velocity = inertia component + cognitive component + social component
+•
+What is the function of?
+o
+The inertia component
+o
+The cognitive component
+o
+The social component
+
+
+AI Programming
+Einde – referentievragen leerstof
+VIVES University of Applied Sciences
+Bachelor in electronics-ICT
