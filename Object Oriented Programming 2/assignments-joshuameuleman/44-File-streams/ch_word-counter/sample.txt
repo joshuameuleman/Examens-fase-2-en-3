@@ -1,0 +1,5 @@
+This is a sample file for the word counter.
+It contains multiple sentences. The purpose is to test reading and counting words.
+Some lines have commas, periods, and other punctuation!
+Is it working? Yes, it should be.
+One more sentence to make the sample a bit longer.
