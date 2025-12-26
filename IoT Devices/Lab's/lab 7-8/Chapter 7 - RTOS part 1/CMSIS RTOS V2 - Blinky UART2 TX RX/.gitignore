@@ -1,0 +1,7 @@
+CubeMX - Template - Nucleo-L476RG
+_*/
+Core/Src/syscalls.c
+Core/Src/sysmem.c
+MakeFile
+startup_stm32l476xx.s
+STM32L476XX_FLASH.ld
