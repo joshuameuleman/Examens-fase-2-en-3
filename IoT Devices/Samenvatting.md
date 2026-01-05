@@ -602,3 +602,134 @@ Je gebruikt een RTOS wanneer de applicatie:
 **Afbeelding**: RTOS message queue  
 ![RTOS message queue](media/MessageQueue.png)
 
+---
+
+## Overzicht per hoofdstuk – wat moet je echt kunnen?
+
+- **H1 – Microcontrollers & HAL**  
+	Begrijpen wat een microcontroller is (CPU, Flash, RAM, peripherals), waarom we HAL gebruiken bovenop CMSIS, en hoe de **CubeMX ➜ Keil** workflow eruitziet.
+- **H2 – C voor embedded**  
+	C‑strings met `\0`, pointers en structs, `const` en `volatile`, en waarom HAL overal met **handles/pointers** werkt.
+- **H3 – GPIO**  
+	Input/output, pull‑up/down, actief hoog/laag, en hoe je een knop of LED correct configureert in CubeMX (incl. debouncing‑idee).
+- **H4 – Polling/Interrupt/DMA**  
+	Verschillen in CPU‑belasting en latentie, en kunnen uitleggen wanneer je welke techniek kiest.
+- **H5 – Timers & PWM**  
+	Relatie tussen klok, prescaler, ARR, en hoe je een servo of motor via PWM aanstuurt.
+- **H6 – I²C**  
+	Open‑drain + pull‑ups, adressering, start/stop/ACK, en waarom je bij lezen eerst een registeradres schrijft.
+- **H7 – SPI**  
+	Lijnen MOSI/MISO/SCK/CS, CPOL/CPHA, verschillende topologieën (point‑to‑point, ster, daisy chain).
+- **H8 – UART**  
+	Frameopbouw (start, data, pariteit, stop), baudrate‑afspraken en typische fouten.
+- **H9 – WiFi (ESP32‑C3)**  
+	Rol van de ESP32 als modem met eigen TCP/IP‑stack en basisidee van AT‑commando’s.
+- **H10 – RTOS**  
+	Taken, prioriteiten, scheduling, message queues/semaforen en waarom dit beter schaalbaar is dan één grote superloop.
+
+---
+
+## Begrippenlijst (examengericht)
+
+**ADC (Analog-to-Digital Converter)**  
+Zet een analoge spanning om naar een digitale waarde. Wordt vaak in combinatie met DMA gebruikt om continu samples in een buffer te plaatsen.
+
+**ARR (Auto-Reload Register)**  
+Register in een timer dat bepaalt **tot welke waarde** de teller loopt. Samen met de prescaler bepaalt het de update-/PWM‑frequentie.
+
+**Baudrate**  
+Aantal **symbool‑overgangen per seconde** bij seriële communicatie (UART). In onze context ≈ aantal bits per seconde. Voorbeeld: 115200 baud.
+
+**CMSIS (Cortex Microcontroller Software Interface Standard)**  
+STandaardlaag met **C‑structs naar de hardware‑registers**. Laag niveau, snel en flexibel, maar minder leesbaar en minder portable dan HAL.
+
+**DMA (Direct Memory Access)**  
+Hardware‑module die **data kopieert tussen peripheral en geheugen** zonder dat de CPU elke byte zelf moet lezen/schrijven. CPU krijgt enkel interrupts bij half/vol buffer.
+
+**Duty cycle**  
+Bij PWM: percentage van de periode dat het signaal **hoog** is. Bepaalt onder andere gemiddelde spanning en servopositie.
+
+**GPIO (General-Purpose Input/Output)**  
+Algemene in-/uitgangspinnen van de microcontroller. Kunnen geconfigureerd worden als input, output, alternate function (UART/SPI/I²C, …) of analog.
+
+**HAL (Hardware Abstraction Layer)**  
+Bibliotheek bovenop CMSIS die hardwaredetails verbergt en werkt met **handles en configuratiestructs**. Maakt code leesbaarder en makkelijk te hergebruiken.
+
+**ISR (Interrupt Service Routine)**  
+Functie die automatisch wordt uitgevoerd wanneer een interrupt optreedt. Moet kort zijn en meestal enkel flags zetten of data bufferen.
+
+**I²C (Inter-Integrated Circuit)**  
+Synchrone seriële bus met twee lijnen (SDA/SCL), open‑drain met pull‑ups, meerdere masters en slaves, **adresgebaseerd**.
+
+**Message queue**  
+RTOS‑mechanisme om **berichten/structs FIFO** tussen taken door te geven. Verhoogt loskoppeling en maakt timing voorspelbaar.
+
+**Mutex (Mutual Exclusion)**  
+RTOS‑mechanisme om ervoor te zorgen dat **slechts één taak tegelijk** een gedeelde resource (bv. een globale variabele of peripheral) gebruikt.
+
+**NVIC (Nested Vectored Interrupt Controller)**  
+Onderdeel van de Cortex‑M‑core dat interruptbronnen beheert, prioriteiten toekent en nested interrupts mogelijk maakt.
+
+**Polling**  
+Techniek waarbij de CPU in een lus **continu een statusbit controleert**. Simpel maar CPU‑intensief.
+
+**Prescaler**  
+Deler voor de timerklok. Verlaagt de ingangsklok zodat de teller trager loopt en bruikbare frequenties ontstaan.
+
+**PWM (Pulse Width Modulation)**  
+Techniek waarbij de gemiddelde spanning wordt geregeld door de **pulsbreedte** (duty cycle) te variëren bij vaste frequentie.
+
+**RTOS (Real-Time Operating System)**  
+Besturingssysteem voor microcontrollers dat **meerdere taken** plant op basis van prioriteiten en tijdseisen (real‑time gedrag).
+
+**Semaphore**  
+RTOS‑mechanisme om **beschikbaarheid van een resource of event** aan te geven (bijvoorbeeld “er is een nieuw datapakket”). Lijkt op een teller die door taken wordt gepend/vrijgegeven.
+
+**SPI (Serial Peripheral Interface)**  
+Snelle synchrone bus met lijnen MOSI/MISO/SCK en per slave een CS‑lijn. Geen adressen op de bus; full‑duplex per klokpuls.
+
+**Superloop**  
+Eenvoudige main‑structuur met één grote `while(1)` waarin alle functionaliteit in volgorde wordt uitgevoerd. Wordt snel onoverzichtelijk bij complexe toepassingen.
+
+**Timer**  
+Hardwareblok dat telt op basis van een klok. Kan interrupts genereren, PWM‑signalen maken, of tijdsmetingen doen via Input Capture.
+
+**UART (Universal Asynchronous Receiver/Transmitter)**  
+Asynchrone seriële communicatie met TX/RX en vooraf afgesproken baudrate, databits, pariteit en stopbits (bv. 115200 8N1).
+
+**Volatile**  
+C‑keyword dat aangeeft dat een variabele **asynchroon kan veranderen** (door hardware, interrupt, DMA). Verhindert gevaarlijke compiler‑optimalisaties.
+
+**Actief hoog / actief laag**  
+Geeft aan of een signaal **actief wordt bij 1 (hoog)** of bij **0 (laag)**. Actief laag wordt vaak met een streepje of `_N` aangeduid (bijv. `RESET_N`).
+
+**Callback**  
+Functie die je naam geeft, maar die door de **HAL of het RTOS** wordt opgeroepen bij een event (bijv. `HAL_UART_RxCpltCallback`). Je implementeert de logica, het framework beslist **wanneer** ze wordt uitgevoerd.
+
+**Context switch**  
+Omschakelen van de CPU van de ene taak/ISR naar de andere. Het RTOS moet hierbij **registers en stackpointers bewaren/herstellen**, wat tijd kost.
+
+**Full-duplex / half-duplex**  
+Bij full‑duplex kan **tegelijk** worden gezonden en ontvangen (klassieke SPI, UART), bij half‑duplex niet (zenden/ontvangen om de beurt op dezelfde lijn).
+
+**Handle**  
+Struct in HAL (bijv. `UART_HandleTypeDef`) die alle **status en configuratie** van een peripheral bijhoudt. Wordt altijd **by reference** (als pointer) doorgegeven aan HAL‑functies.
+
+**Master / slave**  
+Bij bussen als SPI en I²C: de **master** initieert communicatie en stuurt de klok; de **slave** reageert (heeft adres of CS‑lijn).
+
+**Open-drain**  
+Uitgangstype dat alleen actief naar **laag** kan trekken. Hoog wordt via een **pull-up** verkregen. Essentieel voor gedeelde bussen zoals I²C.
+
+**Pariteit**  
+Extra bit in een UART‑frame waarmee je een eenvoudige **foutdetectie** kan doen (even/oneven aantal "1"‑bits).
+
+**Pull-up / pull-down**  
+Weerstand die een ingang naar **VCC (pull‑up)** of **GND (pull‑down)** trekt wanneer er geen actieve stuurbron is, zodat de ingang niet "zweeft".
+
+**Ringbuffer (circular buffer)**  
+Bufferstructuur waarbij begin en einde aan elkaar worden gelust. Veel gebruikt met **DMA** en UART om continu data te kunnen opslaan zonder dat de buffer hoeft te schuiven.
+
+**Taak / thread (RTOS-task)**  
+Lopend programma binnen een RTOS met eigen stack en prioriteit. Meerdere taken lijken "parallel" te lopen doordat de scheduler ertussen wisselt.
+
