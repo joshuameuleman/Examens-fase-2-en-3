@@ -3,7 +3,7 @@
 
 ---
 
-## 🎯 Doel van deze handleiding
+## Doel van deze handleiding
 Deze handleiding focust op het **deployen van AI-modellen op edge devices**: apparaten die lokaal inference uitvoeren, dicht bij de databron (sensoren, camera’s, machines).
 
 De nadruk ligt op:
@@ -17,7 +17,7 @@ Edge AI vereist andere keuzes dan cloud- of server-side AI.
 
 ---
 
-## 1️⃣ Introductie tot Edge AI
+## Introductie tot Edge AI
 
 ### Wat is Edge AI?
 Edge AI is **machine learning inference op fysieke apparaten**, buiten klassieke datacenters:
@@ -42,27 +42,27 @@ Modellen worden meestal **getraind in de cloud**, daarna **geoptimaliseerd en ge
 
 ### Waarom Edge AI?
 
-#### ⚡ Latency
+####  Latency
 - Cloud inference: ~50–100 ms (best case)
 - Edge inference: microseconden
 - Cruciaal voor robots, drones en real-time systemen
 
-#### 📶 Bandbreedte
+####  Bandbreedte
 - Sensors genereren enorme datastromen
 - Uploaden is duur, traag of onmogelijk
 - Edge AI verzendt enkel **samenvattingen of events**
 
-#### 🔒 Privacy & Compliance
+####  Privacy & Compliance
 - Gevoelige data blijft lokaal (GDPR, HIPAA)
 - Minder risico op datalekken
 - Vaak een wettelijke vereiste
 
-#### 📴 Betrouwbaarheid
+####  Betrouwbaarheid
 - Edge blijft werken zonder netwerk
 - Geen single point of failure
 - Vaak gecombineerd met cloud fallback
 
-#### 💰 Kosten & Energie
+####  Kosten & Energie
 - Cloud inference = doorlopende kosten
 - Edge = vaste hardwarekost
 - Lager energieverbruik door minder datatransmissie
@@ -78,7 +78,7 @@ Gebruik Edge AI alleen als **latency, privacy, bandbreedte of autonomie** dat ec
 
 ---
 
-## 2️⃣ Edge hardware & accelerators
+##  Edge hardware & accelerators
 
 ### Waarom hardwarekeuze cruciaal is
 In edge-projecten is hardware vaak:
@@ -99,7 +99,7 @@ Foute keuzes leiden tot:
 - Gecertificeerde modules
 - Sterk software-ecosysteem
 
-👉 Goedkope hardware met slechte SDK’s = verborgen kosten.
+ Goedkope hardware met slechte SDK’s = verborgen kosten.
 
 ---
 
@@ -146,7 +146,7 @@ Foute keuzes leiden tot:
 
 ---
 
-## 3️⃣ Waarom modellen optimaliseren voor de edge?
+##  Waarom modellen optimaliseren voor de edge?
 
 ### Probleem
 Modellen worden getraind op:
@@ -159,7 +159,7 @@ Edge devices hebben:
 - gedeelde GPU-geheugens
 - strakke tijdslimieten
 
-➡️ Zonder optimalisatie zijn veel modellen **onbruikbaar op edge**.
+ Zonder optimalisatie zijn veel modellen **onbruikbaar op edge**.
 
 ---
 
@@ -173,9 +173,9 @@ Voorbeeld:
 
 ---
 
-## 4️⃣ Optimalisatietechnieken
+##  Optimalisatietechnieken
 
-### 🔢 Kwantisatie
+###  Kwantisatie
 Verlaag numerieke precisie:
 
 - FP32 → FP16
@@ -198,7 +198,7 @@ Voordelen:
 
 ---
 
-### ✂️ Pruning
+###  Pruning
 Verwijdert overbodige delen van een netwerk:
 
 - **Unstructured pruning**
@@ -216,7 +216,7 @@ Verwijdert overbodige delen van een netwerk:
 
 ---
 
-### 🧠 Knowledge Distillation
+###  Knowledge Distillation
 - Groot model = *teacher*
 - Klein model = *student*
 - Student leert ook outputverdeling
@@ -224,7 +224,7 @@ Verwijdert overbodige delen van een netwerk:
 
 ---
 
-### 🔄 Graph-level optimalisaties
+###  Graph-level optimalisaties
 Automatisch toegepast door runtimes:
 - operator fusion
 - constant folding
@@ -235,7 +235,7 @@ Onzichtbaar, maar zeer krachtig.
 
 ---
 
-## 5️⃣ Efficiënte modelarchitecturen
+##  Efficiënte modelarchitecturen
 
 ### Vision
 - MobileNet V2/V3
@@ -250,11 +250,11 @@ Onzichtbaar, maar zeer krachtig.
 - kleine LSTM/GRU
 - spectrogram-CNNs
 
-👉 Gebruik bestaande efficiënte modellen i.p.v. zelf zoeken (NAS).
+ Gebruik bestaande efficiënte modellen i.p.v. zelf zoeken (NAS).
 
 ---
 
-## 6️⃣ ONNX: van training naar deployment
+##  ONNX: van training naar deployment
 
 ### Waarom ONNX?
 ONNX = **framework-onafhankelijk modelbestand**:
@@ -279,7 +279,7 @@ Gebruik Netron om het model te inspecteren.
 
 ---
 
-## 7️⃣ ONNX Runtime voor edge inference
+##  ONNX Runtime voor edge inference
 
 ### Kenmerken
 - Lichtgewicht
@@ -300,7 +300,7 @@ Gebruik Netron om het model te inspecteren.
 
 ---
 
-## 8️⃣ High-performance deployment met TensorRT
+##  High-performance deployment met TensorRT
 
 ### Wat is TensorRT?
 - NVIDIA inference-engine
@@ -314,7 +314,7 @@ Gebruik Netron om het model te inspecteren.
 4. Memory planning
 5. Engine serialisatie
 
-➡️ Lange buildtijd, maar extreem snelle inference.
+ Lange buildtijd, maar extreem snelle inference.
 
 ---
 
@@ -326,7 +326,7 @@ Gebruik Netron om het model te inspecteren.
 
 ---
 
-## 9️⃣ Model Optimizer (NVIDIA)
+##  Model Optimizer (NVIDIA)
 
 ### Wat doet Model Optimizer?
 Optimaliseert **vóór export** in PyTorch:
@@ -344,7 +344,7 @@ PyTorch
 
 ---
 
-## ✅ Conclusie
+##  Conclusie
 
 Edge AI vraagt:
 - hardwarebewuste keuzes

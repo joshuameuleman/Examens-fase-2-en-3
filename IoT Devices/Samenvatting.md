@@ -66,7 +66,29 @@ Stel dat je een GPIO‑pin als output wil instellen:
 HAL is dus ideaal voor **snelle ontwikkeling, leesbaarheid en foutreductie**. CMSIS is bruikbaar als je **maximale performantie** en **volledige controle** nodig hebt (bv. in een tijdkritische ISR of bij zeer beperkte geheugenruimte).
 
 **Afbeelding**: lagenmodel CMSIS–HAL–User Code  
-**PDF p. ±10–11**
+![Lagenmodel CMSIS–HAL–User Code](media/cmsis-hal-layers.png)
+
+### STM32-projectstructuur (CubeMX ➜ Keil)
+
+In deze cursus werk je typisch in **drie stappen**:
+
+1. **Hardwareconfiguratie in STM32CubeMX**  
+	- Klokconfiguratie (HSE/HSI, PLL, systeemsnelheid)  
+	- GPIO-modi, pull-ups/pull-downs  
+	- Peripherals (UART, I²C, SPI, timers, ADC, DMA, …)  
+	- NVIC-prioriteiten
+2. **Codegeneratie**  
+	CubeMX genereert een volledig **HAL-project**:  
+	- `Core/Src/main.c` – je eigen applicatiecode  
+	- `Core/Src/stm32l4xx_it.c` – interrupt handlers  
+	- `Core/Src/stm32l4xx_hal_msp.c` – low-level init  
+	- `Drivers/STM32L4xx_HAL_Driver` – HAL-broncode
+3. **Uitwerken van de applicatielogica in Keil µVision**  
+	- Je vult de lege callbacks (`HAL_xxx_MspInit`, `HAL_xxx_TxCpltCallback`, …) en de `while (1)` in  
+	- Je gebruikt de gegenereerde `MX_..._Init()` functies om peripherals te initialiseren
+
+> Zorg dat je het **verschil** begrijpt tussen gegenereerde code (niet zomaar wijzigen) en **user code blokken** waarin jij de logica invult.
+
 
 ---
 
@@ -102,7 +124,27 @@ In embedded context moet je **voorzichtig zijn met geheugen**:
 > Waarom is het nulkarakter (`\0`) noodzakelijk bij C-strings?
 
 **Afbeelding**: string in geheugen  
+![String in geheugen](media/c-string-memory.png)  
 **PDF p. ±37–38**
+
+### `const`, `volatile` en embedded C
+
+In embedded C komen de kwalificaties `const` en `volatile` **zeer vaak** voor:
+
+- `const` betekent dat je de variabele **niet mag wijzigen** in je code.  
+	Wordt gebruikt voor:  
+	- Look-up tabellen in Flash  
+	- Configuratieconstanten (bv. `const uint32_t BAUDRATE = 115200;`)
+- `volatile` vertelt de compiler dat de waarde **asynchroon kan veranderen** (door interrupts, DMA, hardware‑registers).  
+	Zonder `volatile` kan de compiler optimalisaties doen die in embedded context **fout** zijn (bv. een variabele maar één keer lezen terwijl de hardware die ondertussen wijzigt).
+
+Typische voorbeelden:
+
+- Flags gezet in een ISR: `volatile uint8_t button_pressed;`  
+- Hardware‑registerdefinities in CMSIS zijn altijd `volatile`.
+
+> **Examenvraag**  
+> Leg uit waarom een variabele die in een interrupt wordt aangepast als `volatile` gedeclareerd moet worden.
 
 ---
 
@@ -136,6 +178,22 @@ Een `void *` pointer is een **generieke pointer** zonder type; de HAL gebruikt d
 **Afbeelding**: pointers naar structs  
 **PDF p. ±41–42**
 
+### Structs in HAL-configuratie
+
+Vrijwel alle HAL‑initialisatiefuncties gebruiken **configuratiestructs**:
+
+- `GPIO_InitTypeDef` voor GPIO  
+- `UART_HandleTypeDef` voor UART  
+- `TIM_HandleTypeDef` voor timers/PWM  
+- `I2C_HandleTypeDef` voor I²C
+
+Je vult de velden van zo’n struct in (mode, snelheid, pull, baudrate, …) en geeft de **pointer** door aan een HAL‑functie. Hierdoor kan HAL dezelfde API houden, zelfs als de onderliggende registers in andere STM32‑families verschillen.
+
+Belangrijk voor het examen:
+
+- Kunnen uitleggen **waarom** een pointer wordt doorgegeven (efficiënt, geen kopieën).  
+- Begrijpen dat één handle (`huart2`, `htim3`, …) alle **statusinformatie** over die peripheral bevat (state, errors, configuratie).
+
 ---
 
 ## Hoofdstuk 3 – GPIO en Basis IO
@@ -166,7 +224,22 @@ Bij **actief hoog** wordt een functie geactiveerd door een **hoog** signaal (1).
 Bij **actief laag** wordt een functie geactiveerd door een **laag** signaal (0), vaak aangeduid met een streepje of `N` in de naam (bv. `RESET_N`).
 
 **Afbeelding**: GPIO-instellingen in CubeMX  
+![GPIO-configuratie in CubeMX](media/gpio-cubemx-config.png)  
 **PDF p. ±19–20**
+
+### Debouncing van knoppen
+
+Mechanische knoppen **stuiteren**: één fysieke druk kan meerdere snelle overgangen veroorzaken (0‑1‑0‑1‑0). Zonder debouncing denkt de microcontroller dat er **meerdere drukken** zijn.
+
+Manieren om te debouncen:
+
+- **Hardwarematig**: RC‑filter, Schmitt‑trigger  
+- **Softwarematig**:  
+	- In een timer‑interrupt of superloop de knop enkel **om de paar milliseconden** uitlezen  
+	- Een toestand pas als "geldig" beschouwen als hij meerdere opeenvolgende metingen hetzelfde is
+
+> **Examenvraag**  
+> Wat is "debouncing" en waarom is het nodig bij mechanische knoppen?
 
 ---
 
@@ -191,6 +264,7 @@ while (1) {
 Zolang er geen data is, doet de CPU **niets nuttigs**. Dit is acceptabel voor **zeer eenvoudige applicaties**, maar in complexe systemen wil je dat de CPU **andere taken** kan uitvoeren terwijl ze wacht op IO.
 
 **Afbeelding**: polling schema  
+![Polling superloop](media/polling-loop.png)  
 **PDF p. ±4–5**
 
 ---
@@ -217,7 +291,16 @@ Belangrijke begrippen:
 - In een ISR moet je **zo weinig mogelijk werk** doen (snel klaar zijn) en langere verwerking doorschuiven naar de main‑loop of een RTOS‑taak.
 
 **Afbeelding**: interrupt flow  
+![Interrupt flow en NVIC](media/interrupt-flow.png)  
 **PDF p. ±7–10**
+
+### Polling vs. Interrupt vs. DMA – overzicht
+
+| Methode    | CPU-belasting                | Latentie           | Complexiteit | Typisch gebruik                  |
+|-----------|------------------------------|--------------------|-------------|----------------------------------|
+| Polling   | Hoog (continue busy-wait)    | Afhankelijk van loop | Laag        | Eenvoudige, trage events        |
+| Interrupt | Lager, enkel bij events      | Laag               | Gemiddeld   | Knoppen, timers, UART-ontvangst |
+| DMA       | Zeer laag per byte/sample    | Laag per blok      | Hoger       | Grote/continue datastromen      |
 
 ---
 
@@ -241,6 +324,7 @@ Zonder DMA moet de CPU **elke byte** zelf uit een register lezen/schrijven. Met 
 Daarna kan de CPU **andere zaken doen**, terwijl de DMA‑controller de data verplaatst. Enkel bij **half‑vol** of **vol buffer** krijg je een interrupt.
 
 **Afbeelding**: DMA + bus matrix  
+![DMA en busmatrix](media/dma-bus-matrix.png)  
 **PDF p. ±13–15**
 
 ---
@@ -262,7 +346,19 @@ Formule (in eenvoudige vorm):
 Door prescaler en ARR te kiezen, stel je de **frequentie** in waarop de timer overloopt (en dus een interrupt of event kan genereren). Met **Input Capture** kun je tijdstippen van inkomende signalen meten (bv. pulsbreedte of periode van een signaal).
 
 **Afbeelding**: timer clock schema  
+![Timer-klokschema](media/timer-clock.png)  
 **PDF p. ±36**
+
+### Input Capture vs. Output Compare
+
+- **Input Capture**: de timer "vangt" het **telregister** op op het moment dat een ingangspin een flank ziet. Zo kun je perioden en pulsbreedtes **met hoge resolutie** meten.  
+- **Output Compare**: de timer vergelijkt voortdurend de tellerstand met een **vergelijkingswaarde**. Bij een match kan hij:  
+	- Een uitgangspin togglen (toggle‑mode)  
+	- Een interrupt genereren  
+	- Een PWM‑kanaal updaten
+
+> **Examenvraag**  
+> Leg het verschil uit tussen Input Capture en Output Compare bij timers en geef van elk een voorbeeldtoepassing.
 
 ---
 
@@ -288,6 +384,7 @@ Voor een standaard RC‑servo:
 Je gebruikt dus een timer‑kanaal in PWM‑mode en stelt de **compare‑waarde** zó in dat de gewenste pulsbreedte ontstaat.
 
 **Afbeelding**: PWM-signaal  
+![PWM-signaal](media/pwm-signal.png)  
 **PDF p. ±37**
 
 ---
@@ -308,6 +405,7 @@ Omdat de lijnen **open‑drain** zijn, kunnen meerdere toestellen de bus delen z
 Elke slave heeft een **uniek adres** (7‑ of 10‑bit). De master spreekt een specifieke slave aan door dat adres in het adresframe te plaatsen.
 
 **Afbeelding**: I²C bus  
+![I²C-bus met pull-ups](media/i2c-bus.png)  
 **PDF p. ±6–7**
 
 ---
@@ -333,7 +431,21 @@ Typisch I²C‑scenario met een sensor of geheugenchip:
 Je "schrijft" dus eerst **welk register** je wil lezen, daarna doe je een leesoperatie. Zonder die eerste schrijffase weet de slave niet **welke interne locatie** je bedoelt.
 
 **Afbeelding**: I²C timingdiagram  
+![I²C timingdiagram](media/i2c-timing.png)  
 **PDF p. ±9–12**
+
+Veelvoorkomende fouten bij I²C:
+
+- Verkeerde **adresnotatie** (7‑bit vs. 8‑bit adres met R/W‑bit)  
+- Vergeten van de **pull-up weerstanden** → bus blijft laag  
+- Slave verwacht een **Repeated Start**, maar je stuurt een gewone Stop + Start  
+- Verkeerde snelheidsmodus (Standard Mode, Fast Mode, …)
+
+**Afbeelding**: I²C master schrijft naar slave‑register  
+![I²C master/slave schrijffase](media/MaSlWriting.png)
+
+**Afbeelding**: MPU9250 sensor als I²C‑slave  
+![MPU9250 IMU-aansluiting](media/MPU9250.png)
 
 ---
 
@@ -353,6 +465,7 @@ SPI is een **snelle, synchrone seriële bus** met een duidelijke master‑slave 
 In tegenstelling tot I²C heeft SPI **geen adressen** op de bus; de master kiest een slave door zijn CS‑lijn laag te maken.
 
 **Afbeelding**: SPI bus  
+![SPI-bus met master en slaves](media/spi-bus.png)  
 **PDF p. ±3–6**
 
 ---
@@ -369,7 +482,20 @@ Met **CPHA** (Clock PHAse) bepaal je **op welke flank** (opgaande of neergaande)
 Master en slave moeten **exact dezelfde combinatie** van CPOL/CPHA gebruiken, anders wordt data op het verkeerde moment gelezen en krijg je foute bits.
 
 **Afbeelding**: SPI timing  
+![SPI timingdiagram](media/spi-timing.png)  
 **PDF p. ±13–15**
+
+> **Examenvraag**  
+> Noem een concreet probleem dat kan optreden wanneer master en slave andere CPOL/CPHA‑instellingen gebruiken.
+
+**Afbeelding**: SPI point‑to‑point verbinding  
+![SPI point-to-point](media/Spi_PtP.png)
+
+**Afbeelding**: SPI ster-topologie met meerdere slaves  
+![SPI ster-topologie](media/SPIStar.png)
+
+**Afbeelding**: SPI daisy-chain verbinding  
+![SPI daisy-chain](media/SPI_Daisy_Chain.png)
 
 ---
 
@@ -396,7 +522,15 @@ UART wordt vaak gebruikt voor:
 - Communicatie met modules (bv. GPS, Bluetooth, WiFi‑modems)
 
 **Afbeelding**: UART frame  
+![UART-frameopbouw](media/uart-frame.png)  
 **PDF p. ±11**
+
+### Typische UART-problemen
+
+- Verkeerde instellingen (baudrate, databits, pariteit) tussen zender en ontvanger  
+- Vergeten van **CR/LF** of verkeerde line endings in een terminal  
+- Bufferoverrun omdat de applicatie ontvangen data niet snel genoeg verwerkt  
+- Blokkeren op `HAL_UART_Receive()` in **blocking mode** in plaats van interrupt/DMA‑mode te gebruiken
 
 ---
 
@@ -414,6 +548,22 @@ Via UART stuurt de STM32 **AT‑commando’s** (tekstcommando’s) naar de ESP32
 - Versturen/ontvangen van data
 
 De volledige **TCP/IP‑stack en WiFi‑authenticatie** draait op de ESP32. Zo moet je op de STM32 geen complex netwerkprotocol implementeren, enkel de juiste commando’s sturen en antwoorden verwerken.
+
+### Voorbeeld AT-commando-sequentie
+
+Typische stappen om een TCP‑verbinding op te zetten:
+
+1. Module testen: `AT` → antwoord `OK`  
+2. Verbinden met WiFi: `AT+CWJAP="SSID","PASSWORD"`  
+3. TCP‑verbinding maken: `AT+CIPSTART="TCP","server.com",80`  
+4. Data versturen:  
+	- `AT+CIPSEND=lengte`  
+	- (wachten op `>` prompt)  
+	- HTTP‑request of andere payload sturen  
+5. Verbinding sluiten: `AT+CIPCLOSE`
+
+> **Examenvraag**  
+> Leg uit waarom de STM32 bij gebruik van de ESP32‑C3 geen eigen TCP/IP‑stack nodig heeft.
 
 ---
 
@@ -447,4 +597,8 @@ Je gebruikt een RTOS wanneer de applicatie:
 - Op een gestructureerde manier moet kunnen groeien en onderhouden worden
 
 **Afbeelding**: RTOS scheduling  
-**PDF p. ±31–32**
+![RTOS-takenscheduling](media/rtos-scheduling.png)  
+
+**Afbeelding**: RTOS message queue  
+![RTOS message queue](media/MessageQueue.png)
+

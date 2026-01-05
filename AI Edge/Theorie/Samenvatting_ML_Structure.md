@@ -1,7 +1,7 @@
 # Building ML Infrastructure  
 ## Samenvatting – MLOps4ECM
 
-## 🎯 Doel van de handleiding
+## Doel van de handleiding
 Deze handleiding beschrijft hoe machine learning-projecten geëvolueren van **experimentele notebooks** naar **productie-klare systemen**.  
 De focus ligt op **betrouwbaarheid, schaalbaarheid, reproduceerbaarheid en automatisatie** via MLOps-principes.
 
@@ -13,7 +13,7 @@ Machine learning in productie vereist meer dan alleen een goed model:
 
 ---
 
-## 1️⃣ Van notebooks naar productiecode
+## Van notebooks naar productiecode
 
 ### Probleem met notebooks
 Jupyter notebooks zijn ideaal voor experimenten, maar ongeschikt voor productie:
@@ -36,7 +36,7 @@ Jupyter notebooks zijn ideaal voor experimenten, maar ongeschikt voor productie:
 
 ---
 
-## 2️⃣ Model deployment en serving
+## Model deployment en serving
 
 Na training moet een model beschikbaar zijn voor andere systemen.
 
@@ -52,7 +52,7 @@ In de cursus ligt de focus op **server-side deployment**.
 
 ---
 
-## 3️⃣ Communicatieprotocollen voor ML-services
+## Communicatieprotocollen voor ML-services
 
 ### REST API
 - HTTP-gebaseerd (GET, POST, ...)
@@ -73,7 +73,7 @@ In de cursus ligt de focus op **server-side deployment**.
 
 ---
 
-## 4️⃣ FastAPI voor model serving
+## FastAPI voor model serving
 
 ### Waarom FastAPI?
 - Modern Python webframework
@@ -90,7 +90,7 @@ FastAPI is ideaal voor het bouwen van **productie-waardige ML API’s**.
 
 ---
 
-## 5️⃣ Frontends voor ML-API’s
+##  Frontends voor ML-API’s
 
 Een API heeft clients nodig om ermee te communiceren.
 
@@ -108,7 +108,7 @@ Een API heeft clients nodig om ermee te communiceren.
 
 ---
 
-## 6️⃣ Containers en virtuele machines
+##  Containers en virtuele machines
 
 ### Virtuele Machines (VMs)
 - Volledige OS per applicatie
@@ -125,7 +125,7 @@ Een API heeft clients nodig om ermee te communiceren.
 
 ---
 
-## 7️⃣ Docker voor Machine Learning
+##  Docker voor Machine Learning
 
 ### Waarom Docker?
 - Lost “it works on my machine” op
@@ -143,7 +143,7 @@ Docker vormt de **basis voor schaalbare ML-systemen**.
 
 ---
 
-## 8️⃣ Container orchestration
+##  Container orchestration
 
 ### Docker Compose
 - Geschikt voor lokale omgevingen
@@ -161,7 +161,7 @@ Docker vormt de **basis voor schaalbare ML-systemen**.
 
 ---
 
-## 9️⃣ Infrastructuurbeheer
+##  Infrastructuurbeheer
 
 ### Cloud vs On-premise
 - **Cloud**: flexibel, schaalbaar, pay-as-you-go
@@ -174,7 +174,7 @@ Docker vormt de **basis voor schaalbare ML-systemen**.
 
 ---
 
-## 🔧 Infrastructure as Code (IaC)
+##  Infrastructure as Code (IaC)
 
 Infrastructuur wordt beschreven met code:
 - versiebeheer
@@ -190,7 +190,7 @@ IaC voorkomt “snowflake servers” en manuele fouten.
 
 ---
 
-## 💾 Scalable storage voor ML
+##  Scalable storage voor ML
 
 ### Waarom Git niet volstaat
 - Grote binaire bestanden
@@ -212,7 +212,7 @@ Object storage vormt de **ruggengraat van ML-data**.
 
 ---
 
-## 🔄 CI/CD voor Machine Learning
+##  CI/CD voor Machine Learning
 
 ### Waarom automatiseren?
 - Minder fouten
@@ -238,7 +238,7 @@ Object storage vormt de **ruggengraat van ML-data**.
 
 ---
 
-## 🔁 Data pipelines & orchestration
+##  Data pipelines & orchestration
 
 ### CI/CD ≠ data orchestration
 - CI/CD → code-gedreven
@@ -256,7 +256,7 @@ Object storage vormt de **ruggengraat van ML-data**.
 
 ---
 
-## ✅ Conclusie
+##  Conclusie
 
 Machine learning in productie vraagt:
 - software-engineering discipline
