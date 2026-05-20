@@ -1,0 +1,12 @@
+      graph TD
+          RMAX((MAX)) --> LMIN((MIN))
+          RMAX --> RMIN((MIN))
+
+          LMIN --> A3((3))
+          LMIN --> B5((5))
+
+          RMIN --> C2((2))
+          RMIN --> D9((9))
+
+          classDef pruned fill:#eeeeee,stroke:#999999,stroke-dasharray: 4 2;
+          class D9 pruned;

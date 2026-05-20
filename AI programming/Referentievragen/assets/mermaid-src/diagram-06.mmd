@@ -1,0 +1,10 @@
+  graph TD
+      R((Root)) --> P1((Parent A))
+      R --> P2((Parent B))
+      P1 --> S1((Sibling 1))
+      P1 --> S2((Sibling 2))
+      P2 --> L1((Leaf))
+      P2 --> G((Goal))
+
+      classDef goal fill:#d3f9d8,stroke:#28a745,stroke-width:2px;
+      class G goal;
