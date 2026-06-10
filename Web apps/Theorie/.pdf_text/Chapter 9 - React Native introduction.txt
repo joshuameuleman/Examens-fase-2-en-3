@@ -1,0 +1,250 @@
+N                                                                                                  AFBE
+deling"
+                                                                                                 1 Wann
+                           Web apps                                                                   de `Ba
+                                                                                                      afbee
+                           Chapter 9: React Native - introduction                                     Invoe
+                           L. Espeel
+                                                                                                 2 Select
+N                               React Native (1)                                                      en klik
+deling"                                                                                                   Invo
+                           · Ontwikkeld door Meta Platforms (voorheen Facebook).
+  -knoppen                    · Sinds 2025 onderdeel van de React Foundation (Linux Foundation)  3 Klik m
+                        2                                                                             van d
+                           · Framework voor mobiele applicaties met JavaScript / TypeScript.          herste
+                           · Gebruikt React-concepten om native componenten aan te sturen.
+                           · Ondersteunt Android, iOS, macOS, Windows en Web.                    4 Om d
+                           · Apps werken (en voelen aan) als echte native apps.                       de tab
+                           · Wordt tegenwoordig gebruikt in heel wat (commerciële) apps:              klik op
+                                                                                                      afbee
+                                                                                                      Bijsnijd
+
+                                                                                                  1
+N                               React Native (2)
+deling"
+                           Voordelen:
+  -knoppen                 · Eén codebase  meerdere platformen.
+                        3  · Snelle ontwikkeling met Hot Reloading.
+                           · Native performance (geen webview).
+                           · Grote community & veel bibliotheken.
+                           · Herbruikbare logica vanuit React.
+
+                           Beperkingen:
+                           · Niet alle native features zijn standaard beschikbaar (soms moet je zelf native code schrijven).
+                           · Minder geschikt voor zeer grafisch intensieve apps (zoals games).
+
+N                          Architectuur (1)
+deling"
+                           Van architectuur zijn er zaken anders in React Native t.o.v. React:
+  -knoppen
+                        4  React (web)   React Native (mobile)               Toelichting
+                           HTML + CSS    Native Views & Styles (via Fabric)  Fabric rendert direct native UI-elementen met native styling.
+                           DOM                                               JSI is een snelle C++ interface die directe synchronisatie tussen JS
+                                         JSI (JavaScript Interface)          en native mogelijk maakt.
+                           React Router                                      Wordt nog steeds gebruikt voor navigatie, maar werkt bovenop de
+                                         React Navigation                    Fabric rendering engine (Fabric).
+                           Browser                                           De runtime-omgeving is een mobiele engine (Hermes, JSC of V8)
+                                         Android/iOS Emulator                die via JSI met native code praat.
+                                         of fysiek device                    Om native modules dynamisch te laden via JSI.
+                                         TurboModules                        Genereert type-safe bindings tussen JS en native code.
+                                         CodeGen                             Wordt gebruikt voor layout-berekeningen, is nu geïntegreerd met
+                                                                             Fabric.
+                                         Yoga (Layout Engine)
+
+                                                                                                                                                   2
+N
+deling"
+
+                           Architectuur (2)
+
+-knoppen
+
+          5
+
+N                               Ontwikkeltools (1)
+deling"
+                           We kiezen Expo als ontwikkelplatform voor React Native:
+  -knoppen                 · Maakt het eenvoudig om te starten, biedt standaardmodules en testmogelijkheden en laat apps
+                        6
+                              draaien in de browser of Expo Go.
+                              · Expo Go: mobiele app (beschikbaar voor iOS en Android) waarmee je React Native-apps kunt
+
+                                  bekijken, testen en ontwikkelen zonder dat je ze hoeft te bouwen of te installeren via Xcode of
+                                  Android Studio.
+                           · Bevat EAS (Expo Application Services) om builds te maken.
+                              · EAS is een verzameling cloud-diensten die door Expo wordt aangeboden om het bouwen,
+                                  testen en publiceren van React Native-apps makkelijker en sneller te maken.
+
+                                                                                                                                   3
+N                               Ontwikkeltools (2)
+deling"
+                           Volg de stappen op:
+  -knoppen                 https://docs.expo.dev/get-started/set-up-your-environment
+                           We hebben voor het voorbeeld hier verder gekozen voor:
+                           · Android Emulator
+                           · Development build
+                           · Uitvinken optie Build with Expo Application Services (EAS)  we gaan een lokale build maken
+
+            7
+
+N                               Ontwikkeltools (3)
+deling"
+                           · Kies als besturingssysteem bv. Windows voor de verdere instructies.
+  -knoppen                    Zorg dat Openjdk17 geïnstalleerd wordt, dit kan via het choco-commando ofwel via
+                        8     https://aka.ms/download-jdk/microsoft-jdk-17.0.16-windows-x64.msi
+
+                           · Je zal ook Android Studio nodig hebben met Android Emulator:
+                              https://redirector.gvt1.com/edgedl/android/studio/install/2025.1.3.7/android-studio-2025.1.3.7-
+                              windows.exe
+
+                           · Volg de stappen hoe je de SDK en emulator instelt in Android Studio:
+                              https://docs.expo.dev/get-started/set-up-your-
+                              environment/?platform=android&device=simulated&mode=development-
+                              build&buildEnv=local#set-up-android-studio
+
+                                                                                                                               4
+N                               Aanmaken project (1)
+deling"
+                           Commando's :
+  -knoppen                 · npx create-expo-app@latest <name> --template <template type>
+                        9
+                              in het verder voorbeeld in dit hoofdstuk hebben we dit commando gebruikt:
+                              npx create-expo-app@latest my-react-native-app --template blank
+
+                           · cd <name>
+
+                           · npm run android
+                              npm run ios (you need to use macOS to build the iOS project - use the Expo app if you need to do
+                              iOS development without a Mac)
+                              npm run web
+
+N                               Aanmaken project (2)
+deling"
+                           Template types:
+  -knoppen                 · default: standaard template, geschikt voor de meeste apps, bevat meerdere schermen, TypeScript
+                       10
+                              geconfigureerd, routing ingesteld.
+                           · blank: minimale start-template met weinig extra configuratie, geen navigatie vooraf ingebouwd.
+                           · blank-typescript: zelfde als blank, maar met TypeScript.
+                           · tabs: template met file-based routing (via de Expo Router) en vooraf ingestelde tabnavigatie;
+
+                              handig voor apps met meerdere schermen.
+                           · bare-minimum: template die de native mappen (`android', `ios') genereert. Je hebt dus toegang tot
+
+                              native code, minder "fully managed" dan de andere.
+
+                                                                                                                                5
+N                                Migreren van React naar React Native
+deling"
+                            Wat je kunt hergebruiken bij migratie van React naar React Native:
+  -knoppen                  · State management (React hooks).
+                        11  · API-calls (fetch).
+                            · Utility-functies (helpers, constants).
+                            · Business logica.
+                            Wat je moet herschrijven:
+                            · Alle HTML- en CSS-code herschrijven naar Native componenten en styles.
+                            · Routing met React Navigation.
+                            · Eventuele DOM-manipulatie of web-specifieke code.
+
+N                                GUI-componenten (1)
+deling"
+                            In Android en iOS is een view de basisbouwsteen van de gebruikersinterface: een klein rechthoekig
+  -knoppen                  element op het scherm dat kan worden gebruikt om tekst en afbeeldingen weer te geven of te
+                            reageren op gebruikersinvoer. Zelfs de kleinste visuele elementen, zoals een regel tekst of een knop,
+                            zijn vormen van views. Sommige soorten views kunnen op hun beurt andere views bevatten (geneste
+                            views).
+
+            12
+
+                                                                                                                                        6
+N                    GUI-componenten (2)
+deling"
+                Enkele basiscomponenten:
+  -knoppen
+                Meer info:
+                https://reactnative.dev/docs/c
+                omponents-and-apis
+
+            13
+
+N                    Voorbeeld (1)
+deling"
+                Counter-voorbeeld uit hoofdstuk 1 werd hier herwerkt naar een React Native app.
+  -knoppen      index.js:
+
+            14
+
+                                                                                                                                        7
+N                               Voorbeeld (2)
+deling"
+                           Counter.js:
+  -knoppen
+                           · Het JSX-gedeelte bevat hier niet langer de
+                              elementen <> en </>, het werd nu vervangen
+                              door <Text>.
+
+            15
+
+N                               Voorbeeld (3)
+deling"
+                           App.js:
+  -knoppen
+                       16  · Het JSX-gedeelte moet hier starten
+                              met een root element <View>.
+
+                           · JSX bevat geen HTML meer.
+                              · HTML-elementen werden
+                                  vervangen door React Native
+                                  elementen.
+                              · Event handler types zijn ook
+                                  anders, hier gebruiken we
+                                  onPress (en niet langer onClick)
+                                  voor de knop.
+
+                                                                          8
+N                               Voorbeeld (3)
+deling"
+                           App.js:
+  -knoppen
+                       17  · JSX bevat geen CSS meer.
+                              · CSS werden vervangen door
+                                  JavaScript-objecten die styling
+                                  beschrijven. De attributen en
+                                  namen zijn ook anders dan die
+                                  bij CSS.
+
+                           Meer info:
+                           https://reactnative.dev/docs/style
+
+N                               Uitvoer
+deling"
+                           Na ingeven van commando npm run android, zie je de uitvoer in de Android Emulator:
+  -knoppen
+
+            18
+
+                                                                                                                                        9
+N                               Navigatie/routering
+deling"
+                           De meeste apps hebben meerdere schermen, om van het ene scherm naar het andere te gaan,
+  -knoppen                 gebruik je een vorm van routering.
+                       19  Voor nieuwe projecten:
+                           · npx create-expo-app@latest --template react-navigation/template
+                           Voor bestaande projecten:
+                           · npm install @react-navigation/native @react-navigation/native-stack
+
+                           Meer info met codevoorbeeld: https://reactnative.dev/docs/navigation
+
+N                               Referenties
+deling"
+                           · https://docs.expo.dev/get-started/set-up-your-environment
+  -knoppen                 · https://reactnative.dev/docs/getting-started
+
+                              · https://reactnative.dev/docs/components-and-apis
+                              · https://reactnative.dev/docs/style
+                              · https://reactnative.dev/docs/navigation
+
+            20
+
+                                                                                                                                      10
+

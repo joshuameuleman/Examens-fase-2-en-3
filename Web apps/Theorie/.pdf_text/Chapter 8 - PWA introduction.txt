@@ -1,0 +1,383 @@
+N                                                                                                                                                       AFBE
+deling"
+                                                                                                                                                      1 Wann
+                                     Web apps                                                                                                              de `Ba
+                                                                                                                                                           afbee
+                                     Chapter 8: PWA - introduction                                                                                         Invoe
+                                     L. Espeel
+                                                                                                                                                      2 Select
+                                                                                                                                                           en klik
+                                                                                                                                                               Invo
+
+                                                                                                                                                      3 Klik m
+                                                                                                                                                           van d
+                                                                                                                                                           herste
+
+                                                                                                                                                      4 Om d
+                                                                                                                                                           de tab
+                                                                                                                                                           klik op
+                                                                                                                                                           afbee
+
+                                                                                                                                                           Bijsnijd
+
+N                          Situering (1)
+deling"
+                           Tegenwoordig zijn er verschillende manieren om een app op een mobiel apparaat weer te geven:
+  -knoppen
+                        2  Type app            Technologie / Taal                Engine                    Ontwikkelingskost  Toegang tot hardware
+                                                                                                                              Beperkt
+                           Web App             HTML, CSS, JavaScript             Browser                   Laag               (via browser API's)
+                                                                                                                              Gedeeltelijk
+                           PWA                 HTML, CSS, JavaScript             Browser                   Laag -             (camera, notificaties)
+                                               + Service Workers                 WebView (bij publicatie)  Gemiddeld
+                           Hybride App         HTML, CSS, JavaScript JavaScript                                               Via plug-ins
+                           Native App          (met Cordova, Ionic, Capacitor)   WebView + Native bridge Gemiddeld
+                           (via React Native)                                                                                 Volledige toegang
+                           Echte Native App    JavaScript/TypeScript + React     React Native engine       Gemiddeld          via modules
+
+                                               Java/Kotlin (Android)             Native SDK's              Hoog               Volledige toegang
+                                               Xcode/Swift (iOS)
+
+                                                                                                                                                      1
+N
+deling"
+
+                         Situering (2)
+
+-knoppen                 Type app            Performantie  Publicatie in store    Onderhoud & Updates           Offline ondersteuning
+                      3  Web App             Matig         Nee                    Eenvoudig                     Beperkt
+                                             Goed,                                (centrale website)            (browsercacher)
+                         PWA                 afhankelijk   Beperkt                                              Ja
+                                             van browser   (soms via Play Store)  Eenvoudig                     (offline cache)
+                         Hybride App         Goed          Ja                     (web push, updates)
+                         Native App                        Ja                                                   Ja
+                         (via React Native)  Zeer goed     Ja                     Matig
+                         Echte Native App                                         (afhankelijk van plugins)     Ja
+                                             Uitstekend                           Matig
+                                                                                  (per platform apart builden)  Ja
+                                                                                  Moeilijker
+                                                                                  (twee codebases)
+
+N                             PWA (1)
+deling"
+                         · Een Progressive Web App (PWA) is een webapplicatie gebouwd met HTML, CSS en JavaScript die
+  -knoppen                  zich gedraagt als een native app: het is installeerbaar op het startscherm, werkt (gedeeltelijk) offline
+                            en er zijn push-notificaties mogelijk.
+
+                         · Een PWA is geen aparte technologie, maar een verzameling van best practices en API's die samen
+                            een app-achtig gedrag mogelijk maken.
+
+            4
+
+                                                                                                                                       2
+N                               PWA (2)
+deling"
+                           Belangrijke technische vereisten:
+  -knoppen                 · PWA's moeten via HTTPS draaien om veiligheid en betrouwbaarheid te garanderen.
+                        5
+                              · Via test op localhost is HTTPS niet vereist.
+                           · Een valid web app manifest (bv. manifest.json) is nodig met minimaal de opties name/short_name,
+
+                              start_url, display (zoals standalone of fullscreen) en icons.
+                           · Een service worker is geregistreerd om caching, offline functionaliteit en/of push-notificaties te
+
+                              ondersteunen.
+                           · Goede iconen / splash screens / asset-generatie zijn nodig voor verschillende devices.
+
+N                               PWA (3)
+deling"
+                           Voordelen:
+  -knoppen                 · Één codebase voor web + mobiel.
+                        6  · Installeerbaar op het startscherm.
+                           · Er kan offline gewerkt worden doordat er veel gecached wordt.
+                           · Lagere ontwikkelkosten.
+                           · Directe updates zonder store-goedkeuring.
+
+                              · Gebruikers hebben ook sneller de update van de app binnen.
+
+                           Beperkingen:
+                           · Toegang tot sommige sensoren (zoals Bluetooth, NFC of achtergrondlocatie) is beperkt afhankelijk
+
+                              van het platform en de browser.
+
+                                                                                                                                 3
+N                               Overzicht
+deling"
+                           PWA's zien er meestal uit als platformspecifieke
+  -knoppen                 apps.
+                        7  · Ze worden meestal weergegeven zonder de
+
+                              gebruikersinterface van de browser
+                              eromheen, maar het zijn qua technologie
+                              nog steeds websites.
+                           · Dit betekent dat ze een browser-engine
+                              nodig hebben, zoals die in Chrome of
+                              Firefox, om ze te beheren en uit te voeren.
+
+N                               Componenten (1)
+deling"
+                           De belangrijkste componenten die je aantreft in PWA's zijn het volgende:
+  -knoppen                 · Service worker:
+                        8
+                              · Een JavaScript-bestand dat draait in de achtergrond van je browser en taken uitvoert zoals
+                                  caching, pushmeldingen en offline ondersteuning.
+
+                              · Hoewel er voor een PWA geen service worker hoeft te worden geïnstalleerd, worden service
+                                  workers vaak gebruikt met PWA's om op zijn minst een minimale offline ervaring te bieden.
+
+                              · Hoewel een service worker optioneel is, is deze verplicht om een PWA als "installable" te laten
+                                  herkennen door de browser.
+
+                                                                                                                                 4
+N                   Componenten (2)
+deling"
+               · Manifest:
+  -knoppen        · Een manifestbestand van een web-app bevat de minste
+                      informatie in JSON-formaat die de browser nodig heeft om
+                      de PWA te installeren, zoals de naam en het pictogram van
+                      de app.
+                  · Het manifestbestand moet beschikbaar zijn via de root van
+                      je site (of met correcte scope), zodat browsers het kunnen
+                      detecteren.
+
+            9
+
+N                   Componenten (3)
+deling"
+               · Workbox:
+  -knoppen        · Open-source JavaScript library van Google die het makkelijk maakt om PWA's te bouwen, vooral
+                      het beheer van caching en offline functionaliteit via service workers.
+                  · Workbox automatiseert cachingstrategieën, zodat je minder snel fouten maakt bij handmatig
+                      cachebeheer.
+
+            10
+
+                                                                                                                                        5
+N                                Vite
+deling"
+                            · Vite is een moderne ontwikkelserver en build-tool voor webprojecten, ontworpen om sneller en
+  -knoppen                     efficiënter te zijn dan traditionele bundlers. Het wordt veel gebruikt voor frameworks zoals React,
+                        11     Vue, ... en ook voor PWAs.
+
+                            · De officiële PWA-plugin voor Vite is vite-plugin-pwa, gebaseerd op Workbox. Deze integreert
+                               naadloos met frameworks als React.
+
+                            · Kenmerken:
+                               · Ontwikkelserver met instant hot module replacement (HMR).
+                               · Build-tool voor productie.
+                               · Optimalisaties: automatische code-splitting, tree-shaking van ongebruikte code, snellere builds
+                                   dan oudere bundlers.
+
+N                           Project aanmaken (1)
+deling"
+                            · npm create @vite-pwa/pwa@latest <name> -- --template react
+  -knoppen
+                       12   Opmerking: gebruik Node 18 of hoger voor compatibiliteit.
+
+                            Kies in de volgende wizard gerust de standaardopties, het is mogelijk om deze eventueel achteraf
+
+                            te veranderen in vite.config.js.  generateSW
+
+                                                              Er wordt automatisch een service worker gegenereerd die cachingregels
+
+                                                              bevat voor statische assets (HTML, JS, CSS, afbeeldingen, ...) en offline-
+
+                                                              functionaliteit mogelijk maakt.
+
+                                                              Gebruik generateSW als je de standaardconfiguratie van Workbox wilt
+
+                                                              gebruiken.
+
+                                                              injectManifest
+                                                              Gebruik dit als je volledige controle wilt over de cachinglogica in je eigen
+                                                              service-worker.js bestand.
+                                                              De Workbox tool injecteert automatisch een lijst van bestanden die in de
+                                                              cache moeten komen (het "precache manifest"). Hierdoor kan je eigen
+                                                              logica toevoegen zoals: achtergrond-sync, push notifications, ...
+
+                                                                                                                                            6
+N
+deling"
+
+                         Project aanmaken (2)
+
+-knoppen                 Prompt for update
+                     13  De gebruiker krijgt een melding wanneer er een nieuwe versie van de
+                         PWA beschikbaar is.
+
+                         Auto update
+                         De service worker update automatisch op de achtergrond zodra een
+                         nieuwe versie beschikbaar is. De volgende keer dat de gebruiker de app
+                         opent, krijgt hij direct de nieuwe versie.
+
+N
+deling"
+
+                         Project aanmaken (3)
+
+-knoppen                 Met periodic SW updates laat je de browser regelmatig op de achtergrond
+                     14  controleren op updates, zelfs als de gebruiker de app niet actief opent.
+
+                         yes: de app toont een melding of banner wanneer de service worker
+                         alles heeft gecachet wat nodig is om offline te werken. Bv. "App is nu
+                         offline beschikbaar".
+                         no: geen melding. De app werkt offline, maar de gebruiker krijgt geen
+                         visuele bevestiging.
+
+                                                                                                   7
+N
+deling"
+
+                Project aanmaken (4)
+
+-knoppen        yes: de tool genereert automatisch alle benodigde iconen en manifest-bestanden voor je PWA: app-icons
+                in verschillende maten (voor iOS, Android, desktop, etc.), manifest.json met correcte verwijzingen naar de
+                iconen, splash screens en andere PWA-gerelateerde assets.
+                Handig omdat je maar één bronicoon hoeft aan te leveren en de tool doet de rest.
+
+                no: je moet zelf alle icons en manifest-bestanden aanleveren. Dit geeft volledige controle over de assets,
+                maar kost veel meer werk.
+                Dit kan nuttig zijn als je zeer specifieke branding wilt gebruiken of eigen optimalisaties.
+
+            15
+
+N                    vite.config.js (1)
+deling"
+                In vite.config.js kan je opties toevoegen, aanpassen of verwijderen.
+  -knoppen
+
+            16
+
+                                                                                                                                        8
+N                               vite.config.js (2)
+deling"
+                           Zo voegden we de library mkcert toe (voer commando npm install vite-plugin-mkcert -D uit) die een
+  -knoppen                 certificaat/sleutel zal genereren om HTTPS op te zetten. Dit is nodig om de PWA-features te testen
+                       17  die dit vereisen (zoals service workers en installatieprompt).
+
+                           Het server-deel bevat de optie om HTTPS te activeren en connectie toe te laten van om het even welk
+                           ip-adres.
+                           Meer info over dit bestand kan je best raadplegen via https://vite.dev/config.
+
+N                               Builden en uitvoeren (1)
+deling"
+                           Als de wizard ten einde is, voer dan deze commando's uit:
+  -knoppen                 · cd <name>
+                       18  · npm install
+
+                           Indien je snel wenst uit te testen in de browser:
+                           · npm run dev
+
+                              · Open een browser en surf naar http://localhost:5173.
+
+                                                                                                                                9
+N                               Builden en uitvoeren (2)
+deling"
+                           Als je de PWA wilt builden voor productie:
+  -knoppen                 · npm run build
+                       19
+                           · npm run preview
+                              · Is een simulatie van de productieomgeving, handig voor het testen van cachinggedrag.
+                              · Open browser naar http://localhost:4173.
+                              · Hier is het mogelijk om de Manifest en Service workers te bekijken (te vinden bij dev tools via
+                                  F12).
+
+N
+
+deling"
+
+                              Builden en uitvoeren (3)
+
+-knoppen
+                     20
+
+                                                                                                                                   10
+N                               Gegenereerde bestanden (1)
+deling"
+                           Na het builden naar productie werd het één en ander aangemaakt onder de map dist.
+  -knoppen                 · manifest.webmanifest: het manifest-gedeelte uit vite.config.js is hierin opgenomen.
+                       21  · registerSW.js: klein JavaScript-bestand dat de service worker registreert in de
+
+                              browser.
+
+                           · sw.js: de daadwerkelijke service worker van de PWA.
+                           · workbox.js: de runtime library van Workbox, biedt helper functies om
+
+                              cachingstrategieën en precaching te beheren.
+
+N                               Gegenereerde bestanden (2)
+deling"
+                           · index.html: het minimale voor een PWA is opgenomen met o.a. viewport, verwijzingen naar
+  -knoppen                    manifest, icoontjes en registerSW.
+
+            22
+
+                                                                                                                                      11
+N                    Uittesten (1)
+deling"
+                Mogelijkheid om de app te installeren en later te heropenen:
+  -knoppen
+
+            23
+
+N                    Uittesten (2)
+deling"
+                Mobile device:
+  -knoppen
+
+            24
+
+                                                                                                                                      12
+N                               Uittesten (3)
+deling"
+                           · Eenmaal geïnstalleerd, gedraagt de PWA zich net als andere geïnstalleerde applicaties: door op het
+  -knoppen                    applicatiepictogram te klikken, wordt de PWA geopend, zelfs als de gebruiker offline is.
+
+                           · PWA's die door een browser worden geïnstalleerd, blijven specifiek voor deze browser. Dit betekent
+                              dat de browser die is gebruikt om een PWA te installeren, de browser is die is gebruikt om die PWA
+                              uit te voeren. Het betekent ook dat je dezelfde PWA vanuit een andere browser kunt installeren en
+                              dat de twee apps zich als twee verschillende instanties gedragen en geen gegevens delen.
+
+                           · Op de meeste mobiele besturingssystemen wordt het verwijderen van een PWA op dezelfde
+                              manier bereikt als het verwijderen van andere applicaties.
+
+            25
+
+N                               Publicatie (1)
+deling"
+                           PWA's hoeven in principe niet gepubliceerd te worden in een store om ze te installeren, doch is het
+  -knoppen                 een goed idee om dit te doen:
+                       26  · Bereik: veel gebruikers zoeken apps via stores, dus listing kan zichtbaarheid vergroten.
+                           · Vertrouwen: gebruikers vinden het vaak betrouwbaarder om via een bekende store te installeren.
+                           · Installatiegemak: store-installatie, iconen op startscherm, automatische updates.
+                           · Distributie-optie: je kunt zowel webversie (via URL) als store-versie aanbieden.
+                           · Nadeel: voor store-publicatie moet je voldoen aan store-richtlijnen en soms een wrapper of extra
+
+                              tool gebruiken (meer werk).
+
+                                                                                                                                  13
+N                               Publicatie (2)
+deling"
+                           Om een PWA te kunnen publiceren in een app store wordt deze "verpakt" als een native container die
+  -knoppen                 de webapp binnen een WebView uitvoert. De PWA blijft dus draaien in een browser-engine.
+                       27  Volg de stappen om dit mogelijk te maken:
+                           · Google Play
+                           · Microsoft Store
+                           · Meta Quest Store
+
+                           Opmerking: Apple ondersteunt PWA's in Safari, maar accepteert ze officieel niet direct in de App
+                           Store. Je moet dan een wrapper gebruiken, zoals Capacitor (van Ionic), Cordova en PWABuilder.
+
+N                               Referenties
+deling"
+                           Doorneem deze website voor meer info over Vite React PWA:
+  -knoppen                 · https://vite-pwa-org.netlify.app/guide
+
+                           Algemene info over PWA:
+                           · https://web.dev/pwa
+                           · https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps
+
+            28
+
+                                                                                                                               14
+

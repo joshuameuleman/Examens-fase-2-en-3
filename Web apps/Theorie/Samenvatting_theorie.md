@@ -1006,6 +1006,292 @@ useEffect(() => {
 
 Next.js is een React-framework dat bovenop React een projectstructuur en server-side mogelijkheden toevoegt.
 
+## 8. PWA - Introduction
+
+Hoofdstuk 8 is vooral theoriegericht voor het examen. Het kan gevraagd worden in deel 1, maar de basisconfiguratie kan ook nuttig zijn als je offline een bestaand project moet herkennen.
+
+### Wat is een PWA?
+
+Een Progressive Web App is een webapplicatie met HTML, CSS en JavaScript die zich app-achtig gedraagt.
+
+Kenmerken:
+
+- installeerbaar op startscherm;
+- gedeeltelijk of volledig offline bruikbaar;
+- gebruikt browsertechnologie;
+- kan service workers gebruiken voor caching en updates;
+- kan push-notificaties ondersteunen, afhankelijk van platform/browser.
+
+Een PWA is geen aparte programmeertaal of framework. Het is een combinatie van webtechnologie, best practices en browser-API's.
+
+### Vergelijking app-types
+
+- Web app: lage ontwikkelkost, draait in browser, beperkte hardwaretoegang, meestal niet installeerbaar als echte app.
+- PWA: webtechnologie + service worker + manifest, installeerbaar, offline cache mogelijk, hardwaretoegang blijft browserafhankelijk.
+- Hybride app: webtechnologie in WebView met native bridge, publicatie in store mogelijk.
+- React Native app: JavaScript/TypeScript + React-concepten, maar native UI-componenten; geen WebView voor gewone UI.
+- Echte native app: Kotlin/Java voor Android of Swift/Xcode voor iOS, hoogste platformcontrole maar duurder en aparte codebases.
+
+### Technische vereisten
+
+Een PWA heeft typisch:
+
+- HTTPS, behalve bij testen op `localhost`;
+- een geldig web app manifest;
+- een service worker;
+- iconen en assets voor verschillende devices;
+- cachingstrategie voor offline gebruik.
+
+Manifest bevat minimaal zaken zoals:
+
+```json
+{
+  "name": "my-react-pwa-app",
+  "short_name": "my-react-pwa-app",
+  "start_url": "/",
+  "display": "standalone",
+  "theme_color": "#ffffff",
+  "icons": []
+}
+```
+
+### Service worker
+
+Een service worker is een JavaScript-bestand dat in de achtergrond draait. Het kan onder andere:
+
+- bestanden cachen;
+- offline gedrag ondersteunen;
+- pushmeldingen verwerken;
+- updates van de app beheren.
+
+Zonder service worker is een webapp meestal niet echt installable als PWA.
+
+### Workbox
+
+Workbox is een library van Google die caching en service workers vereenvoudigt. Vite PWA gebruikt Workbox om automatisch service workers en cachingregels te genereren.
+
+### Vite PWA
+
+Project aanmaken volgens de slides:
+
+```bash
+npm create @vite-pwa/pwa@latest naam -- --template react
+cd naam
+npm install
+npm run dev
+```
+
+Productie testen:
+
+```bash
+npm run build
+npm run preview
+```
+
+Belangrijk:
+
+- `npm run dev`: gewone ontwikkelserver.
+- `npm run build`: maakt productie-build in `dist`.
+- `npm run preview`: simuleert productie; beter om service worker/cache te testen.
+
+Voorbeeld uit de oefeningen:
+
+```js
+import { VitePWA } from "vite-plugin-pwa";
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+
+export default defineConfig({
+  plugins: [
+    react(),
+    VitePWA({
+      registerType: "prompt",
+      manifest: {
+        name: "my-react-pwa-app",
+        short_name: "my-react-pwa-app",
+        start_url: "/",
+        display: "fullscreen",
+        theme_color: "#ffffff",
+      },
+      workbox: {
+        globPatterns: ["**/*.{js,css,html,svg,png,ico}"],
+        cleanupOutdatedCaches: true,
+        clientsClaim: true,
+      },
+    }),
+  ],
+});
+```
+
+### generateSW vs injectManifest
+
+- `generateSW`: Workbox genereert automatisch een service worker met standaard cachingregels.
+- `injectManifest`: je schrijft zelf service-workerlogica; Workbox injecteert enkel de lijst met te precachen bestanden.
+
+Gebruik `generateSW` voor eenvoudige standaard-PWA's. Gebruik `injectManifest` wanneer je zelf controle nodig hebt over caching, background sync of push.
+
+### Updates
+
+- Prompt for update: gebruiker krijgt melding wanneer nieuwe versie beschikbaar is.
+- Auto update: service worker update op de achtergrond.
+- Periodic updates: browser controleert periodiek of er nieuwe service worker/appversie is.
+
+### Gegenereerde bestanden na build
+
+In `dist` kunnen onder andere verschijnen:
+
+- `manifest.webmanifest`;
+- `registerSW.js`;
+- `sw.js`;
+- `workbox.js`;
+- aangepaste `index.html` met manifest- en service-workerverwijzingen.
+
+### Belangrijke PWA-valkuilen
+
+- PWA-features vragen vaak HTTPS.
+- Offline gedrag test je best via productie-build en preview.
+- Een PWA die in Chrome is geinstalleerd is een andere instantie dan dezelfde PWA geinstalleerd vanuit een andere browser.
+- Publicatie in een store kan, maar vraagt soms een wrapper zoals Capacitor, Cordova of PWABuilder.
+
+## 9. React Native - Introduction
+
+Hoofdstuk 9 is vooral theoriegericht voor deel 1. Voor deel 2 wordt React Native volgens de exameninfo niet gevraagd, maar de principes kunnen wel bevraagd worden.
+
+### Wat is React Native?
+
+React Native is een framework voor mobiele apps met JavaScript/TypeScript en React-concepten. Het werd ontwikkeld door Meta en gebruikt React om native UI-componenten aan te sturen.
+
+Ondersteunde platformen:
+
+- Android;
+- iOS;
+- macOS;
+- Windows;
+- Web.
+
+### Voordelen
+
+- Een codebase voor meerdere platformen.
+- Snelle ontwikkeling met hot reloading.
+- Native performance voor gewone UI.
+- Grote community.
+- React-hooks en businesslogica zijn vaak herbruikbaar.
+
+### Beperkingen
+
+- Niet elke native feature is standaard beschikbaar.
+- Soms moet je native modules of platformcode gebruiken.
+- Minder geschikt voor zeer grafisch intensieve apps.
+- UI moet herschreven worden tegenover React web.
+
+### React web vs React Native
+
+| React web | React Native |
+|---|---|
+| HTML-elementen zoals `div`, `p`, `button` | Native componenten zoals `View`, `Text`, `Button`, `Pressable` |
+| CSS-bestanden of inline CSS | `StyleSheet.create()` met JavaScript-objecten |
+| DOM | Native UI via Fabric |
+| Browser runtime | Mobiele runtime zoals Hermes, JSC of V8 |
+| `onClick` | `onPress` |
+| React Router | Vaak React Navigation |
+
+### Expo
+
+In de cursus wordt Expo gekozen als ontwikkelplatform.
+
+Expo biedt:
+
+- eenvoudige projectstart;
+- Expo Go om apps te testen;
+- development builds;
+- EAS voor cloud-builds;
+- standaardmodules en tooling.
+
+Project aanmaken:
+
+```bash
+npx create-expo-app@latest my-react-native-app --template blank
+cd my-react-native-app
+npm run android
+```
+
+Andere commando's:
+
+```bash
+npm run ios
+npm run web
+```
+
+Voor iOS-builds heb je macOS nodig, tenzij je via Expo Go of EAS werkt.
+
+### Templates
+
+- `default`: standaard Expo-template, vaak met TypeScript en routing.
+- `blank`: minimale start.
+- `blank-typescript`: minimale start met TypeScript.
+- `tabs`: tabnavigatie met Expo Router.
+- `bare-minimum`: geeft native `android` en `ios` mappen.
+
+### Migreren van React naar React Native
+
+Herbruikbaar:
+
+- state management met hooks;
+- API-calls met `fetch`;
+- businesslogica;
+- helpers;
+- validatiefuncties.
+
+Herschrijven:
+
+- HTML naar native componenten;
+- CSS naar `StyleSheet`;
+- DOM-manipulatie;
+- web-specifieke events;
+- routing naar React Navigation of Expo Router.
+
+### Basisvoorbeeld
+
+```jsx
+import { useEffect, useState } from "react";
+import { Text } from "react-native";
+
+function Counter() {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCount((count) => count + 1);
+    }, 1000);
+
+    return () => clearInterval(timer);
+  }, []);
+
+  return <Text>The counter is set to: {count}</Text>;
+}
+```
+
+App met root `View`:
+
+```jsx
+import { View, Button, Alert } from "react-native";
+
+function App() {
+  return (
+    <View>
+      <Button title="Click me" onPress={() => Alert.alert("Hello")} />
+    </View>
+  );
+}
+```
+
+Belangrijk:
+
+- JSX bevat geen HTML.
+- Een scherm start vaak met `View`, `SafeAreaView` of `ScrollView`.
+- Tekst moet in een `Text` component staan.
+- Styling gebeurt via objecten, niet via gewone CSS-bestanden.
+
 ## Typische Examenvragen En Valkuilen
 
 ### Wat is fout?
