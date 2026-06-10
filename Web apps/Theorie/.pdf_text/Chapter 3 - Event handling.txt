@@ -1,0 +1,52 @@
+N                                                             AFBE
+deling"
+                                                            1 Wann
+               Web apps                                          de `Ba
+                                                                 afbee
+               Chapter 3: Event handling                         Invoe
+               L. Espeel
+                                                            2 Select
+N                   Inhoud                                       en klik
+deling"                                                              Invo
+               · In dit hoofdstuk:
+  -knoppen        · Handling Click Events on a Button       3 Klik m
+                  · Managing the Content of an Input Field       van d
+                                                                 herste
+            2
+                                                            4 Om d
+                                                                 de tab
+                                                                 klik op
+                                                                 afbee
+                                                                 Bijsnijd
+
+                                                             1
+N                               Events verwerken
+deling"
+                           3 stappen:
+  -knoppen                 1. Event capture wordt onmiddellijk in de JSX-code gedaan.
+                        3
+                              · Via attributen onClick, onChange, onKeyDown, ... in JSX-code die corresponderen met HTML
+                                  onclick, onchange, onkeydown, ... attributen.
+
+                           2. Uitvoeren van event handler gekoppeld aan het type van event in JSX-code.
+                              · Bv. <button onClick={ handleClick }></button>
+
+                                   handleClick is een referentie naar een functie dat uitgevoerd wordt van zodra er op de control
+                                   geklikt wordt. Schrijf hier zeker niet handleClick().
+                           3. Gebruik maken van reactieve variabelen om UI up te daten.
+
+N                               Codevoorbeelden
+deling"
+                           Heel wat codevoorbeelden terug te vinden in het boek:
+  -knoppen                 · Knoppen om tellers manueel te incrementeren
+                        4  · Knoppen om tellers te (her)starten met tellen
+                           · Tellers eenmalig automatisch laten tellen en tellers hierna eventueel herstarten
+
+                           · Veranderde invulwaarde tekstveld verwerken
+                           · Invulwaarde tekstveld beperken tot een set van karakters
+                           · Focus geven aan tekstveld
+                           · Weergave van meerdere tellers met real-time som
+                           · Focus geven aan de eerste teller
+
+                                                                                                                                   2
+

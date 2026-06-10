@@ -1,0 +1,38 @@
+                                  Info examen Web apps
+
+Examen
+Bestaat uit 2 delen:
+
+· Deel 1: schriftelijk op papier
+    o Gesloten boek, geen hulpmiddelen toegelaten.
+    o Kleine theorie-vragen en inzichtsvragen via open vragen en meerkeuzevragen: zoals vul
+         deze code aan, wat is er fout in deze code + corrigeer, wat wordt de uitvoer, wat is
+         eigen aan <begrip>?, ...
+         Zorg dat je zeker weet wat elk geziene (React) begrip betekent in de cursus (boek, slides,
+         codevoorbeelden).
+
+· Deel 2: programmeeroefening op laptop
+    o Open boek, maar geen internet toegelaten. Offline materiaal zoals cursus,
+         documentatie, codevoorbeelden, extra notities/documentatie en gemaakte oefeningen.
+         Oefening zal ofwel "from scratch" zijn ofwel een bestaand project verder uitbreiden.
+
+Let op:
+Open boekgedeelte = ook een goede voorbereiding nodig! Op voorhand dien je alle geziene
+codevoorbeelden, oefeningen en handboek goed bekeken te hebben om snel te kunnen
+opzoeken, want de tijd op het examen is te beperkt!
+Het is sterk aanbevolen om een vorm van samenvatting te maken (dit kan een inhoudstafel zijn,
+enkele belangrijke code snippets, ...).
+
+Vergeet zeker niet om het volgende mee te brengen naar het examen:
+· Laptop met Visual Studio Code. Sla hierop ook alle documenten (handboek, slides,
+
+    codevoorbeelden, oefeningen, ...) van Toledo lokaal op!
+
+Leerstof
+
+Algemeen: alles wat gezien is in de cursus. Dit is het handboek, slides en codevoorbeelden van
+de 9 hoofdstukken samen met de oefeningen.
+
+Hoofdstuk 7 - 9 (React routes, PWA, React native) zal niet gevraagd worden in het tweede deel,
+maar het principe/de info die in de slides staat kan wel bevraagd worden in het eerste deel.
+

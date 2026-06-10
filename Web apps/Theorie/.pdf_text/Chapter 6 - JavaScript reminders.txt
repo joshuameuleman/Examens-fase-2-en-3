@@ -1,0 +1,60 @@
+N                                                                                             AFBE
+deling"
+                                                                                            1 Wann
+                           Web apps                                                              de `Ba
+                                                                                                 afbee
+                           Chapter 6: JavaScript reminders                                       Invoe
+                           L. Espeel
+                                                                                            2 Select
+N                               Inhoud (1)                                                       en klik
+deling"                                                                                              Invo
+                           · In dit hoofdstuk worden deze JavaScript-concepten toegelicht:
+  -knoppen                    · Keywords "let", "var" and "const"                           3 Klik m
+                        2     · Manipulating Objects in JavaScript                               van d
+                                     · Structuring an Object                                     herste
+                                     · Object Destructuring
+                                     · Passing Objects as Function Parameters               4 Om d
+                                     · Using the "..." Notation with Objects                     de tab
+                              · Manipulating Arrays in JavaScript                                klik op
+                                     · Structuring an Array                                      afbee
+                                     · Array Destructuring                                       Bijsnijd
+                                     · Using the "..." Notation with Arrays
+                                                                                             1
+N                             Inhoud (2)
+deling"
+                           · Using Import and Export of Modules in JavaScript
+  -knoppen                        · Using Modules in HTML Files
+                        3         · Using the "import" Statement
+                                  · Using the "export" Statement
+                                  · Using the "export default" Statement
+                                  · Difference Between "export" and "export default" Statements
+
+                           · Using Arrow Functions in JavaScript
+                                  · Using Arrow Function Syntax
+                                  · Understanding the Value of "this" in Arrow Functions
+
+N                             Inhoud (3)
+deling"
+                           · Using the map( ) and filter( ) Methods of the JavaScript Array Class
+  -knoppen                        · Using the map( ) Method
+                        4         · Using the filter( ) Method
+                                  · Using the map( ) and filter( ) Methods in React
+
+                           · Using Promise Objects in JavaScript
+                                  · Promise Object Definition
+                                  · Without Using Promise Objects
+                                  · Using Promise Objects
+
+                           · Using "async" and "await" Statements in JavaScript
+
+                                                                                                   2
+N                 Inhoud (4)
+deling"
+               · Creating an Asynchronous Function That Utilizes JavaScript's "await" Statement
+  -knoppen            · Using "await" with a Function That Returns a Promise Object
+                      · Using "await" with a Function Declared with "async"
+
+            5
+
+                                                                                                 3
+

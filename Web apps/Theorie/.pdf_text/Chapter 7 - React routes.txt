@@ -1,0 +1,179 @@
+N                                                                                                          AFBE
+deling"
+                                                                                                         1 Wann
+               Web apps                                                                                       de `Ba
+                                                                                                              afbee
+               Chapter 7: React routes                                                                        Invoe
+               L. Espeel
+                                                                                                         2 Select
+                                                                                                              en klik
+                                                                                                                  Invo
+
+                                                                                                         3 Klik m
+                                                                                                              van d
+                                                                                                              herste
+
+                                                                                                         4 Om d
+                                                                                                              de tab
+                                                                                                              klik op
+                                                                                                              afbee
+
+                                                                                                              Bijsnijd
+
+N                   React Router
+deling"
+               · React Router is een library die routeringsmogelijkheden biedt voor React-toepassingen.
+  -knoppen     · Mogelijkheden:
+
+                  · Meerdere pagina's creëren in een single-page applicatie
+                  · URL-parameters en queryreeksen verwerken
+                  · Browsergeschiedenis en navigatie beheren
+                  · Geneste routes en lay-outs maken
+                  · Beveiligde routes voor authenticatie implementeren
+
+            2
+
+                                                                                                         1
+N                   Eenvoudige route (1)
+deling"
+               · React Router zit niet standaard in de React library, dit dient apart geïnstalleerd te worden:
+  -knoppen        npm install react-router-dom
+
+               · Vervolgens dit toevoegen in code bovenaan waar we routering zullen toepassen (bv. in App.js):
+                   import { BrowserRouter, Routes, Route, Link } from "react-router-dom";
+
+            3
+
+N                   Eenvoudige route (2)
+deling"
+               · In bv. App.js kunnen we een navigatiestructuur opbouwen op basis van deze elementen:
+  -knoppen        · BrowserRouter: root element om routering toe te laten.
+                  · Link of NavLink: navigatielink om de URL up te daten.
+                  · Routes: container om alle routedefinities bij te houden.
+                  · Route: definieert de mapping tussen een URL-pad
+                      en een component.
+
+               · Componenten Home en About stellen hier in feite views
+                  voor die ingeladen worden.
+
+            4
+
+                                                                                                                2
+N                   Eenvoudige route (3)
+deling"
+               Home.js:
+  -knoppen     About.js:
+
+            5
+
+N                   Eenvoudige route (4)
+deling"
+               I.p.v. het Link-element, kan er ook gebruik gemaakt worden van het NavLink-element. Hiermee
+  -knoppen     kunnen we styling toepassen als de link al dan niet actief is.
+               · Ideaal voor navigatiemenu's, breadcrumbs en tabbladen.
+               · Pas de import aan waarbij ook NavLink toegevoegd wordt:
+
+                   import { <andere zaken ...>, NavLink } from "react-router-dom";
+
+            6
+
+                                                                                                                                       3
+N                   Geneste routes (1)
+deling"
+               Dit is een Route-element binnenin een ander Route-element.
+  -knoppen     Binnenin het Products-component zullen de componenten CarProducts en BikeProducts ingeladen
+               worden.
+
+            7
+
+N                   Geneste routes (2)
+deling"
+               Products.js:
+  -knoppen
+
+            8  Het Outlet-element specifieert waar de inhoud van de child (CarProducts of BikeProducts) moet
+
+               ingeladen worden.
+
+                                                                                                              4
+N                   Geneste routes (3)
+deling"
+               Child-componenten:
+  -knoppen
+
+            9
+
+N                   URL-parameters (1)
+deling"
+               We gebruiken variabelen om toe te voegen aan routepaden, dit kan gebruikt worden om data door te
+  -knoppen     geven aan de verschillende componenten.
+               Bv. http://localhost:3000/customer/Tobias  de URL-parameter is hier Tobias.
+
+            10
+
+                                                                                                                                        5
+N                    URL-parameters (2)
+deling"
+                In het Info-component maken we gebruik van de useParams()-hook om de URL-parameter op te
+  -knoppen      kunnen vragen:
+
+            11
+
+N                    URL-parameters (3)
+deling"
+                Alternatieven om data door te geven aan andere componenten:
+  -knoppen      · Via query-parameter (?key1=value1&key2=value2&...)
+
+                · Via attributen van componenten en die vervolgens via props uitlezen (zie o.a. hoofdstuk 1 p. 44).
+
+            12  · Via useContext()-hook (zie hoofdstuk 4 p. 130).
+
+                                                                                                                     6
+N                    React Router V7
+deling"
+                Vanaf React Router V7 kan je naast voorgaande mogelijkheden met elementen BrowserRouter,
+  -knoppen      Link/NavLink, Routes en Route, ook gebruik maken van de functie createBrowserRouter om de paden
+                op te bouwen en te mappen met de componenten.
+
+                               Meer info: https://reactrouter.com/start/data/installation
+
+            13
+
+N                    Frontend en backend (1)
+deling"
+                Vaak wil je in de views gegevens dynamisch inladen, al dan niet afkomstig uit een databank.
+  -knoppen      Om dit mogelijk te maken, kun je twee projecten opzetten:
+
+                1. Frontend-project met React
+                    De componenten bevatten fetch-functies (geëncapsuleerd in de useEffect-hook, zie hoofdstuk 4)
+                    om data op te halen van de backend via een URL met een poortnummer.
+                   · Gebruik localhost als host indien beide projecten op dezelfde machine draaien.
+                   · Het uitwisselingsformaat tussen frontend en backend is vrij te kiezen; vaak wordt JSON gebruikt.
+
+            14
+
+                                                                                                                       7
+N                    Frontend en backend (2)
+deling"
+                2. Backend-project met bv. Node.js/Express
+  -knoppen          Dit project zet een webserver op die luistert naar een bepaald poortnummer waarop de frontend
+                    zal verbinden.
+                   · De backend heeft ook de mogelijkheid om te verbinden met een databank.
+
+                Een voorbeeld van zo'n opzet vind je op https://www.angularminds.com/blog/how-to-create-a-react-
+                app-with-a-node-backend.
+
+            15
+
+N                    Frontend en backend (3)
+deling"
+                Een alternatief is gebruik maken van Next.js, een open-source React-framework dat bovenop React
+  -knoppen      gebouwd is. Next.js voegt daar een server-side laag en projectstructuur aan toe.
+                Meer info op:
+                · https://nextjs.org
+                · https://www.geeksforgeeks.org/nextjs/nextjs-tutorial
+
+            16
+
+                                                                                                                                        8
+

@@ -1,0 +1,255 @@
+N                                                                                                                                    AFBE
+deling"
+                                                                                                                                   1 Wann
+                           Web apps                                                                                                     de `Ba
+                                                                                                                                        afbee
+                           Chapter 1: React components                                                                                  Invoe
+                           L. Espeel
+                                                                                                                                   2 Select
+                                                                                                                                        en klik
+                                                                                                                                            Invo
+
+                                                                                                                                   3 Klik m
+                                                                                                                                        van d
+                                                                                                                                        herste
+
+                                                                                                                                   4 Om d
+                                                                                                                                        de tab
+                                                                                                                                        klik op
+                                                                                                                                        afbee
+
+                                                                                                                                        Bijsnijd
+
+N                               Leermateriaal
+deling"
+                           · Handboek: Master React in 5 Days: Become a React Expert in Under a Week
+  -knoppen
+                        2                            Sarrion, E. (2023). Master React in 5 Days: Become a React Expert in Under a
+                                                     Week (1st ed. 2023.). Apress.
+                                                     E-book beschikbaar op https://limo.libis.be/VIVES
+                                                     https://doi-org.vives.e-bronnen.be/10.1007/978-981-19-1800-1
+
+                           · Slides: extra notities en aanvullingen
+
+                                                                                                                                   1
+N                               Overzicht hoofdstukken
+deling"
+                           Boek:
+  -knoppen                 1. React components
+                        3  2. JSX code
+                           3. Event handling
+                           4. React Hooks
+                           5. Application: a task list with React
+                           6. JavaScript reminders
+                           Extra:
+                           7. React routes
+                           8. PWA - introduction
+                           9. React Native - introduction
+
+N                               Inhoud
+deling"
+                           · In dit hoofdstuk:
+  -knoppen                    · Why use React
+                        4     · React Virtual DOM
+                                     · Creating the Virtual DOM, Reconciliation Process
+                              · Decomposing an Application into Components
+                              · Analyzing the Main Files of the React Application
+                                     · index.js, index.html, App.js
+                              · JSX Syntax in React
+                              · Creating a First React Component
+                                     · Installation, code example counter, useState(), useEffect(), using attributes
+
+                                                                                                                      2
+N                               React
+deling"
+                           · Wat?
+  -knoppen                    · Open source JavaScript library ontwikkeld door Meta (Facebook) om interactieve user interfaces
+                        5         te maken voor Web Apps, vooral voor single-page applicaties (SPA's).
+
+                           · Belangrijkste kenmerken:
+                              · Herbruikbare componenten
+                              · Virtual DOM: representatie van de UI (HTML-elementen) in het geheugen
+                              · Documentatie en grote community die meebouwt aan React
+                              · Multi-platform: Web, mobile, desktop
+                                     · React en React Native (voor native iOS en Android apps)
+                              · Uitgebreid ecosysteem: Redux, GraphQL, Next.js, Gatsby, Material UI
+
+N                          React Virtual DOM
+deling"
+                           · Representatie van de UI in het geheugen
+  -knoppen                    · Waarom? Rechtstreekse DOM-aanpassingen zijn te traag als React-component wordt
+                        6         aangepast.
+
+                           · Bij aanpassing aan een React-component:
+                              · React update Virtual DOM, dit gaat sneller.
+                              · React voert reconciliatie (render) uit.
+                                     · Vergelijken van oude Virtual DOM  nieuwe Virtual DOM:
+                                          Alle wijzigingen in één keer aan DOM aanbrengen.
+
+                           <div>                        <div>                        Counter: 1
+                            <h2> Counter: 0</h2>         <h2> Counter: 1</h2>
+                            <button>Increment</button>   <button>Increment</button>
+                           </div>                       </div>
+
+                                                                                                                                3
+N                               Applicatie verdelen in componenten
+deling"
+                           · Het opbouwen van de code met componenten zorgt voor:
+  -knoppen                    · Begrijpbare code
+                              · Onderhoudbaarheid (mogelijk om aanpassingen te doen)
+                              · Herbruikbare componenten
+                              · Debugbaarheid: elke component is apart testbaar
+
+            7              Bron: Sarrion, E. (2023). Master React in 5 Days(1st ed. 2023.). Apress.
+
+N                               Een eerste React-applicatie (1)
+deling"
+                           · Nodig:
+  -knoppen                    · Editor zoals Visual Studio Code
+                        8     · Node.js
+                                      · https://nodejs.org/dist/v22.19.0/node-v22.19.0-x64.msi
+
+                           · Gebruik commandovenster om een React-applicatie aan te maken:
+                              · Legacy manier (volgens boek, zullen wij ook gebruiken):
+                                      · npm install -g create-react-app
+                                      · create-react-app <name>
+                                      · cd <name>
+                                      · npm start
+                                      Browser opent en surft standaard naar http://localhost:3000
+                              · Nieuwere manier met Vite build tool:
+                                      · npm create vite@latest <name> -- --template react
+                                      · cd <name>
+                                      · npm run dev
+                                      Open een browser en surf standaard naar http://localhost:5173
+
+                                                                                                     4
+N                               Een eerste React-applicatie (2)
+deling"
+                           · App componenten  render de App-component in het root-element:
+  -knoppen                    · index.html
+                              · index.js (of main.jsx):
+
+                           React.StrictMode: laat toe om info naar console weg te schrijven bij fouten.
+
+            9              Meer info: https://react.dev/reference/react/StrictMode.
+
+N                             Een eerste React-applicatie (3)
+deling"
+                           · App.js (*):
+  -knoppen
+                       10  (*) indien gebruik gemaakt werd van de
+                           Vite build tool, is de extensie van .js
+                           standaard .jsx.
+
+                                                                                                         5
+N                               JSX-syntax
+deling"
+                           · JSX = JavaScript and XML
+  -knoppen                 · Componenten aanmaken zoals in HTML: JSX-code wordt omgezet naar JavaScript object.
+                           · Variabelen staan tussen accolades:
+
+            11
+
+N                               Een eerste React-component (1)
+deling"
+                           · Voorbeeld: teller maken dat elke seconde incrementeert.
+  -knoppen                    · App.js aanpassen naar:
+                       12
+                              · Extra bestand Counter.js aanmaken:
+                              · In App.css kan je eventuele extra
+
+                                  styling toevoegen.
+
+                                                                                                                 6
+N                               Een eerste React-component (2)
+deling"
+                           · Console-venster bekijken kan in de meeste browsers via de F12-toets.
+  -knoppen                    · Uitvoer van DOM (onder tabblad Elements in Chrome).
+                       13
+                           · Er wordt gesuggereerd om React DevTools extensie te installeren, met dit zie je de hiërarchie van
+                              de React-componenten en hoelang ze nodig hebben om te laden. Interessant om te debuggen.
+                              · Eventueel moet je browser opnieuw opstarten na installatie extensie.
+                              · Extra tabbladen zijn op het einde in het console-venster terug te vinden: Components, Profiler
+
+                           · Counter-functie verder uitbreiden met setInterval-functie:
+
+N                               Een eerste React-component (3)
+deling"
+                           · Uitvoer: waarde in console telt op, maar op pagina blijft het 0 ...
+  -knoppen                    · Reden: React weet niet dat de toestand (state) veranderd is en een reconciliatie (render) nodig
+                                  is.
+                              · En ... een render-functie moet "pure" zijn:
+                                     · Het mag geen "side effects" bevatten  geen aanmaak van timer toegelaten.
+                                     · Het moet deterministisch zijn: steeds hetzelfde resultaat geven met zelfde parameters.
+
+            14
+
+                                                                                                                                        7
+N                               Een eerste React-component (4)
+deling"
+                           · Oplossing: gebruik maken van reactive variabelen.
+  -knoppen                    · Bij wijziging van zo'n variabele  React rendert component zo snel mogelijk.
+                       15
+                           · React heeft concept van state:
+                              · Is een set van reactive variabelen.
+                              · Gebruik de useState()-functie (wordt ook hook genoemd) om een reactive variabele te maken.
+
+                           · Aanpassing Counter.js:
+
+                                                                                                                                                                 Equivalent aan:
+
+N                               Een eerste React-component (5)
+deling"
+                           · Bekijk de uitvoer, zowel in console als webpagina. Wat merk je op?
+  -knoppen                 · Oorzaak: setInterval wordt bij elke reconciliatie (render) opgeroepen. Dit zorgt voor meerdere
+                       16
+                              actieve timers.
+                           · Oplossing: gebruik de useEffect()-functie.
+
+                              · Setup: deze functie wordt uitgevoerd bij elke reconciliatie (render).
+                              · Cleanup: deze functie wordt gerouterneerd en wordt vóór een nieuwe reconciliatie (render)
+
+                                  uitgevoerd.
+
+                              Import aanpassen naar:
+
+                                                                                                                                                                                  8
+N
+
+deling"
+
+                              Een eerste React-component (6)
+
+-knoppen                                                                                                      Setup
+                     17
+                                                                                                   Cleanup
+
+                           · Uitvoer? Vaststelling tussen console en webpagina?
+                           · Kopieer nu eens regel 16 en plaats deze op regel 17 (m.a.w. 2x setCount(count + 1) aanroepen).
+
+                               Vaststelling: teller blijft per 1 tellen ... Waarom?
+                              · Oplossing: gebruik setCount((count) => count + 1);
+
+N                               Een eerste React-component (7)
+deling"
+                           · Er kunnen ook attributen gebruikt worden in een component.
+  -knoppen                    · Bv. init-attribuut meegeven in App.js:
+                       18
+                                    <Counter />
+                                    <Counter init="5" /> // 1) als stringwaarde
+                                    <Counter init={5} /> // 2) als JavaScript-waarde
+
+                              · Het attribuut wordt via props opgevraagd in Counter.js:
+
+                               ...
+
+                                                                                                                             9
+N                    Een eerste React-component (8)
+deling"
+                · Opmerking: als je letterlijk <Counter init="5" /> wilt afdrukken naar de browser, dien je dit toe te
+  -knoppen         passen in de return-blok (in App.js):
+
+            19
+
+                                                                                                                        10
+

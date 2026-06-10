@@ -1,0 +1,42 @@
+N                                                                                                                           AFBE
+deling"
+                                                                                                                          1 Wann
+                           Web apps                                                                                            de `Ba
+                                                                                                                               afbee
+                           Chapter 5: Practical application -                                                                  Invoe
+                           managing a task list with React
+                           L. Espeel                                                                                      2 Select
+                                                                                                                               en klik
+                                                                                                                                   Invo
+
+                                                                                                                          3 Klik m
+                                                                                                                               van d
+                                                                                                                               herste
+
+                                                                                                                          4 Om d
+                                                                                                                               de tab
+                                                                                                                               klik op
+                                                                                                                               afbee
+
+                                                                                                                               Bijsnijd
+
+N                               Inhoud (1)
+deling"
+                           In dit hoofdstuk wordt een praktisch voorbeeld gegeven om een task list op te bouwen.
+  -knoppen                 Als uiteindelijk resultaat zal je de volgende functionaliteit bekomen:
+                        2
+                           3x Add Item                                                                            Modify
+
+                                                                                                                          1
+N              Inhoud (2)                                        Remove first
+deling"                                                          and last item
+                                                     Modify
+  -knoppen                                           or
+                                                     click
+                                                     outside
+                                                     text field
+
+            3
+
+                                                                                2
+

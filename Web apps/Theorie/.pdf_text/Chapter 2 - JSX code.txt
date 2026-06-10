@@ -1,0 +1,95 @@
+N                                                                            AFBE
+deling"
+                                                                           1 Wann
+               Web apps                                                         de `Ba
+                                                                                afbee
+               Chapter 2: JSX code                                              Invoe
+               L. Espeel
+                                                                           2 Select
+N                   Inhoud                                                      en klik
+deling"                                                                             Invo
+               · In dit hoofdstuk:
+  -knoppen        · Using the <React.Fragment>, <Fragment> and the <> Tag  3 Klik m
+                  · Inserting JavaScript Code into JSX                          van d
+                  · Writing Conditions in JSX                                   herste
+                  · Writing a Loops in JSX
+                  · Using Styles in JSX                                    4 Om d
+                                                                                de tab
+            2                                                                   klik op
+                                                                                afbee
+                                                                                Bijsnijd
+
+                                                                            1
+N                               <React.Fragment>, <Fragment> en <> tag
+deling"
+                           Het startpunt in de codevoorbeelden is App.js die App()-functie bevat waarin JSX-code wordt
+  -knoppen                 geretourneerd. Het is steeds verplicht om na een return statement een root-element op te geven, dit
+                        3  kan een <div> zijn.
+                           · Maar is meer overhead: er wordt een extra div-element in DOM geplaatst.
+                           · Beter is één van de 3 volgende React-tags te gebruiken.
+
+                           Deze tags zijn synoniem van elkaar en geven dezelfde uitvoer, doch kleine verschillen:
+                           · <React.Fragment> tag vereist import React from "react";
+                           · <Fragment> tag vereist import { Fragment } from "react";
+                           · <> tag vereist geen import en is de kortste vorm, kan wel niet gebruikt worden indien je attributen
+
+                              wilt aanmaken.
+
+N                               Condities in JSX
+deling"
+                           Condities in JSX kan je gebruiken d.m.v.:
+  -knoppen                 · Zelfoproepende JavaScript-functie:
+                        4
+                           · JavaScript ternaire operator:
+
+                                                                                                                                  2
+N                               Lussen in JSX (1)
+deling"
+                           Lussen in JSX kan je gebruiken d.m.v.:
+  -knoppen                 · Zelfoproepende JavaScript-functie.
+                        5
+                              · Opmerking: er is hier
+                                  nog verfijning nodig
+                                  (zie warning in console).
+
+                                  (Voeg een JSX-element
+                                  React.Fragment of
+                                  Fragment toe met
+                                  attribuut key dat een unieke
+                                  waarde moet bevatten, bv. de
+                                  waarde i ).
+
+N                               Lussen in JSX (2)
+deling"
+                           · map()-functie op een JavaScript-
+  -knoppen                    array.
+                              · Bij (grote) arrays met sequenties
+                                  is dit efficiënter:
+                                     · [...Array(10).keys()]
+                                          waarden 0 t.e.m. 9
+                                     · [...Array(10).keys()].slice(1)
+                                          waarden 1 t.e.m. 10
+
+            6
+
+                                                                       3
+N                               Stijlen in JSX (1)
+deling"
+                           In JSX-code kunnen er ook CSS-stijlen toegevoegd worden:
+  -knoppen
+
+            7
+
+N                               Stijlen in JSX (2)
+deling"
+                           Wat als we nu die voorgaande inline CSS styling willen vervangen door externe CSS styling (in een
+  -knoppen                 apart bestand)?
+                        8  Algemene stappen:
+                           · CSS-bestand aanmaken met hierin de kleur en lettergrootte onder een CSS-klassenaam.
+                           · Het CSS-bestand vervolgens importeren in Counter.js.
+                           · Attribuut className gebruiken in het element.
+
+                           Exacte syntax: zie les.
+
+                                                                                                                              4
+
